@@ -1,6 +1,6 @@
+""" V1: Login with Google works """
+
 from django.apps import AppConfig
-# Hi
-# Hi Matt
 
 class LoginConfig(AppConfig):
     name = 'login'

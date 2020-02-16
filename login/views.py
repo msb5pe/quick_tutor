@@ -1,6 +1,6 @@
-from django.shortcuts import render
+""" V1: Login with Google works """
 
-# Create your views here.
+from django.shortcuts import render
 
 from django.http import HttpResponse
 
@@ -10,3 +10,7 @@ def index(request):
 
 def login_success(request):
     return HttpResponse("You have successfully logged in")
+
+def logout(request):
+    return HttpResponse("You have successfully logged out")
+

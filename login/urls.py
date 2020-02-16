@@ -1,3 +1,5 @@
+""" V1: Login with Google works """
+
 from django.urls import path
 
 from . import views
