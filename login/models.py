@@ -9,5 +9,3 @@ class User(models.Model):
     email = models.CharField(max_length=200)
     token = models.CharField(max_length=200, primary_key=True)
     last_signin = models.DateTimeField('Last sign-in')
-
-
