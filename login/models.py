@@ -1,4 +1,6 @@
-""" V1: Login with Google works """
+""" 
+V1: Login with Google works 
+"""
 
 
 from django.db import models
