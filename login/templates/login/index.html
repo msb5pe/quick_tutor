@@ -1,31 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="google-signin-client_id" content="849030481645-8laklq9ameqka9a9ah39aj7mfehgbq8v.apps.googleusercontent.com" />
-    <title>Quick Tutor</title>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta charset="utf-8">
+
+  <title>Login</title>
+
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+    crossorigin="anonymous">
 </head>
 <body>
-    <div id="profileinfo"></div>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <div class="jumbotron">
+    <h1>Login</h1>
+    {% if user.is_authenticated %}
+      <p>Logged as {{ user.username }}</p>
+      <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+    {% else %}
+      <a class="btn btn-primary" href="{% url "social:begin" "google-oauth2" %}">
+        Login
+      </a>
+    {% endif %}
+  </div>
 
-    <script>
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            document.getElementById('profileinfo').innerHTML = profile.getName() + "<br>"
-                + "<a href='mailto:'" + profile.getEmail() + "'>" + profile.getEmail() + "</a>" + "<br>"
-                + "<img src='" + profile.getImageUrl() + "'/>";
-        }
-    </script>
-    <a href="#" onclick="signOut();">Sign out</a>
-    <script>
-        alert("Logout");
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-                document.getElementById('profileinfo').innerHTML = "";
-            });
-        }
-    </script>
 </body>
 </html>
