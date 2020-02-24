@@ -12,7 +12,7 @@ from django.shortcuts import render
 def login_success(request):
     return HttpResponse("You have successfully logged in")
 
-def logout(request):
+def logout_success(request):
     return HttpResponse("You have successfully logged out")
 
 def index(request):
