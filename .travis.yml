@@ -1,2 +1,5 @@
 language: python
-
+deploy:
+  provider: heroku
+  api_key:
+    secure: "22b8c023-1071-47a7-9981-4ba11ac27333"
