@@ -1,0 +1,18 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<h3>Create New User</h3>
+
+<form action="/login" method="post">
+    {% csrf_token %}
+    Username: <input type="text" name="username"><br>
+    Classes taken: <input type="text" name="class_taken"><br>
+    <div class="input-group mb-3">
+        <button type="submit", value="Submit", class="btn btn-success">Don't press rn</button>
+    </div>
+</form>
+
+<a href="{% url 'profile' %}">View Profile</a>
+
