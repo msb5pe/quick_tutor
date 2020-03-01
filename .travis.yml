@@ -13,3 +13,6 @@ deploy:
   app: scrumptious-quicktutor
   on:
     repo: uva-cs3240-s20/project-101-scrumptious
+branches:
+  only: 
+    - master
