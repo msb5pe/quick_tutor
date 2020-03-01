@@ -120,6 +120,8 @@ dmypy.json
 
 # End of https://www.gitignore.io/api/django
 
+#Custom
+
 polls/.DS_Store
 
 polls/templates/.DS_Store
