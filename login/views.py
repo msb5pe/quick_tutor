@@ -20,7 +20,6 @@ def logout_success(request):
 def index(request):
     return render(request, 'login/index.html')
 
-
 def create_user(request):
     return render(request, 'login/create_user.html')
     # return HttpResponse("This is where you would create your profile if your email doesn't exist on the server")
