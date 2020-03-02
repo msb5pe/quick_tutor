@@ -13,3 +13,8 @@ deploy:
   app: scrumptious-quicktutor
   on:
     repo: uva-cs3240-s20/project-101-scrumptious
+branches:
+  only: 
+    - master
+notifications:
+  slack: scrumptioushq:48f0xKwiXqLQ3E62Y4ZZANsz
