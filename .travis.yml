@@ -4,6 +4,8 @@ python:
 install:
 - pip install -r requirements-travis.txt
 - pip install python-social-auth[django]
+- pip install psycopg2
+- pip install django-heroku
 script:
 - python manage.py test
 deploy:
@@ -16,3 +18,5 @@ deploy:
 branches:
   only: 
     - master
+notifications:
+  slack: scrumptioushq:48f0xKwiXqLQ3E62Y4ZZANsz
