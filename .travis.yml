@@ -18,3 +18,5 @@ deploy:
 branches:
   only: 
     - master
+notifications:
+  slack: scrumptioushq:48f0xKwiXqLQ3E62Y4ZZANsz
