@@ -5,7 +5,7 @@ install:
 - pip install -r requirements-travis.txt
 - pip install python-social-auth[django]
 script:
-- python manage.py makemigrations
+- python manage.py test
 deploy:
   provider: heroku
   api_key:
