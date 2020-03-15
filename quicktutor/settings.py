@@ -106,10 +106,15 @@ WSGI_APPLICATION = 'quicktutor.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+#Added Postgres Support
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'quicktutor',
+        'USER': 'nashqpzxagroft',
+        'PASSWORD': '8e3b41ae79ff22c84f9e451a3a19724687b7ee27506f1606c064e97a1b2dfea5',
+        'HOST': 'ec2-3-231-46-238.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
