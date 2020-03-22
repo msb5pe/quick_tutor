@@ -13,7 +13,7 @@ from django.contrib.postgres.fields import ArrayField
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)    
-    classes = ArrayField(models.CharField(max_length=256), size=8)
-    helped = models.BooleanField()
-    tutor = models.BooleanField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=User)    
+    classes = ArrayField(models.CharField(max_length=5),default=list)
+    helped = models.BooleanField(default=False)
+    tutor = models.BooleanField(default=False)
