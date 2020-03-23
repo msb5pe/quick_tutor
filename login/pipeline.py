@@ -4,7 +4,7 @@ import datetime
 from django.db import models
 
 def save_profile(backend, user, response,  *args, **kwargs):
-    print(response)
+    # print(response)
     if UserProfile.objects.filter(user_id=user.id).count()==0 :
         userProfile = UserProfile.objects.create(
             user=user,
