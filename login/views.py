@@ -8,29 +8,16 @@ from django.views import generic
 from django.utils import timezone
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout
-
-
-def login_success(request):
-    #If user exists, then display details; otherwise, prompt to create new user
-    try:
-        user = request.user
-        user = user.social_auth.get(provider='google')
-        return render(request, 'login/existing_user.html')
-    except:
-        pass    
-    return HttpResponseRedirect(reverse('login:create_user'), args=(request.user))
+from .models import UserProfile
+from .forms import UserEditForm, ProfileEditForm
+from django.contrib.auth.decorators import login_required
 
 def logout_success(request):
     logout(request)
     return redirect('index')
 
 def index(request):
-    #If the user is authenticated, then save user details and redirect to success; otherwise, render login
-    user = request.user
-    if(user.is_authenticated()):
-        print(user.email)
-        print(user.name)
-        redirect('success', request)
+    #If the user is authenticated, then save user details and logins
     return render(request, 'login/index.html')
 
 def create_user(request):
@@ -40,17 +27,22 @@ def create_user(request):
 def profile(request):
     return HttpResponse("This is your profile page")
 
-# def pull_details(request):
-#     try:
-#         email = request.POST.get('email')
-#         u = User()
-#         u.email = email
-#         u.save()
-#     except Exception as e:
-#         # Redisplay the question voting form.
-#         print(e)
-#         return render(request, 'polls/suggestion.html', {
-#             'error_message': "Empty text fields",
-#         })
-#
-#     return HttpResponseRedirect(reverse('polls:suggest_list'))
+@login_required
+def edit_profile(request):
+    print('here1')
+    if request.method == 'POST':
+        user_form = UserEditForm(data=request.POST or None, instance=request.user)
+        profile_form = ProfileEditForm(data=request.POST or None, instance=request.user.userprofile, files=request.FILES) #??????????????????????????????? user.profile or user.userprofile
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+        else:
+            user_form = UserEditForm(instance=request.user)
+            profile_form = ProfileEditForm(instance=request.user)
+
+        context = {
+            'user_form': user_form,
+            'profile_form': profile_form,
+        }
+        print('here2')
+        return render(request, 'login/edit_profile.html', context) #???????????????????????????????????????
