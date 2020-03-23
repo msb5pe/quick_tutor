@@ -122,11 +122,11 @@ dmypy.json
 
 #Custom
 
-polls/.DS_Store
+login/static/login/.DS_Store
 
-polls/templates/.DS_Store
+login/static/login/templates/.DS_Store
 
-polls/static/.DS_Store
+login/static/login/static/.DS_Store
 
 .DS_Store
 
