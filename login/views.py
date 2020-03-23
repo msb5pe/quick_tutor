@@ -12,28 +12,12 @@ from .models import UserProfile
 from .forms import UserEditForm, ProfileEditForm
 from django.contrib.auth.decorators import login_required
 
-
-def login_success(request):
-    #If user exists, then display details; otherwise, prompt to create new user
-    try:
-        user = request.user
-        user = user.social_auth.get(provider='google')
-        return render(request, 'login/existing_user.html')
-    except:
-        pass    
-    return HttpResponseRedirect(reverse('login:create_user'), args=(request.user))
-
 def logout_success(request):
     logout(request)
     return redirect('index')
 
 def index(request):
-    #If the user is authenticated, then save user details and redirect to success; otherwise, render login
-    user = request.user
-    if(user.is_authenticated()):
-        print(user.email)
-        print(user.name)
-        redirect('success', request)
+    #If the user is authenticated, then save user details and logins
     return render(request, 'login/index.html')
 
 def create_user(request):

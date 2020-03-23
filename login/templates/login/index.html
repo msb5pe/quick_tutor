@@ -15,14 +15,10 @@
   <div class="jumbotron">
     <h1>Login</h1>
     {% if user.is_authenticated %}
-<<<<<<< HEAD
       <p>Logged as {{ user.username }}</p>
       <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
     <br>
     <a href="{% url 'edit_profile' %}">Edit profile?</a>
-=======
-      <a class="btn btn-primary" href="{% url 'success' %}">Login</a>
->>>>>>> arvindbranch
     {% else %}
       <a class="btn btn-primary" href="{% url "social:begin" "google-oauth2" %}">
         Login
