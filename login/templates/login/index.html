@@ -1,30 +1,237 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
+{% load static %}
+
 <head>
+
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-  <title>Login</title>
+  <title>Question Connection</title>
 
-  <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
-    crossorigin="anonymous">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="{% static 'login/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'https://fonts.googleapis.com/css?family=Montserrat:400,700' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'https://fonts.googleapis.com/css?family=Kaushan+Script' %}" rel='stylesheet' type='text/css'>
+  <link href="{% static 'https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' %}" rel='stylesheet' type='text/css'>
+  <link href="{% static 'https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' %}" rel='stylesheet' type='text/css'>
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'login/css/agency.css' %}" rel="stylesheet">
+
 </head>
-<body>
-  <div class="jumbotron">
-    <h1>Login</h1>
-    {% if user.is_authenticated %}
-      <p>Logged as {{ user.username }}</p>
-      <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
-    <br>
-    <a href="{% url 'edit_profile' %}">Edit profile?</a>
-    {% else %}
-      <a class="btn btn-primary" href="{% url "social:begin" "google-oauth2" %}">
-        Login
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <img src="{% static 'login/img/logo.png' %}" width="150" height="50">
       </a>
-    {% endif %}
-  </div>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav text-uppercase ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#team">Team</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#login">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="masthead">
+    <div class="container">
+      <div class="intro-text">
+        <div class="intro-lead-in">Need quick help on schoolwork?</div>
+        <div class="intro-heading text-uppercase">Sign Up to be a Tutor or Tutee</div>
+            {% if user.is_authenticated %}
+              <p>Logged as {{ user.username }}</p>
+              <a class="btn btn-primary btn-lg" href="{% url 'logout' %}">Logout</a>
+            <br>
+              <a href="{% url 'create_user' %}">Update profile?</a>
+              {% else %}
+                <a class="btn btn-primary btn-lg" href="{% url "social:begin" "google-oauth2" %}">
+                  Login
+                </a>
+              {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <!-- Services -->
+  <section class="page-section" id="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase">Services</h2>
+          <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-md-4">
+          <span class="fa-stack fa-4x">
+            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+          </span>
+          <h4 class="service-heading">E-Commerce</h4>
+          <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+        </div>
+        <div class="col-md-4">
+          <span class="fa-stack fa-4x">
+            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+            <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
+          </span>
+          <h4 class="service-heading">Responsive Design</h4>
+          <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+        </div>
+        <div class="col-md-4">
+          <span class="fa-stack fa-4x">
+            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+            <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+          </span>
+          <h4 class="service-heading">Web Security</h4>
+          <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="bg-light page-section" id="team">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+          <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="team-member">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/1.jpg' %}" alt="">
+            <h4>Sakhi Singh</h4>
+            <p class="text-muted">Scrum Master</p>
+          </div>
+        </div>
+
+      <div class="col">
+          <div class="team-member">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/3.jpg' %}" alt="">
+            <h4>Matt Burkher</h4>
+            <p class="text-muted"> Testing </p>
+          </div>
+        </div>
+
+
+        <div class="col">
+          <div class="team-member">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/2.jpg' %}" alt="">
+            <h4>Alexandra Marquis</h4>
+            <p class="text-muted">Requirements Manager</p>
+          </div>
+        </div>
+        </div>
+
+      <div class="row h-100">
+      <div class="col">
+          <div class="team-member">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/3.jpg' %}" alt="">
+            <h4>Arvind Anand</h4>
+            <p class="text-muted">Software Architect</p>
+          </div>
+        </div>
+
+      <div class="col">
+          <div class="team-member">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/1.jpg' %}" alt="">
+            <h4>Sean Davidson</h4>
+            <p class="text-muted"> --- </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-4">
+          <span class="copyright">Copyright &copy; Your Website 2019</span>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline social-buttons">
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline quicklinks">
+            <li class="list-inline-item">
+              <a href="#">Privacy Policy</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">Terms of Use</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'login/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'login/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="{% static 'login/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+  <!-- Contact form JavaScript -->
+  <script src="{% static 'login/js/jqBootstrapValidation.js' %}"></script>
+  <script src="{% static 'login/js/contact_me.js' %}"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="{% static 'login/js/agency.min.js' %}"></script>
 
 </body>
+
 </html>
