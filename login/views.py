@@ -8,16 +8,16 @@ from django.views import generic
 from django.utils import timezone
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout
-
-
-def login_success(request):
-    return HttpResponse("You have successfully logged in")
+from .models import UserProfile
+from .forms import UserEditForm, ProfileEditForm
+from django.contrib.auth.decorators import login_required
 
 def logout_success(request):
     logout(request)
-    return redirect('index')
+    return redirect('login:index')
 
 def index(request):
+    #If the user is authenticated, then save user details and logins
     return render(request, 'login/index.html')
 
 def create_user(request):
@@ -27,17 +27,22 @@ def create_user(request):
 def profile(request):
     return HttpResponse("This is your profile page")
 
-# def pull_details(request):
-#     try:
-#         email = request.POST.get('email')
-#         u = User()
-#         u.email = email
-#         u.save()
-#     except Exception as e:
-#         # Redisplay the question voting form.
-#         print(e)
-#         return render(request, 'polls/suggestion.html', {
-#             'error_message': "Empty text fields",
-#         })
-#
-#     return HttpResponseRedirect(reverse('polls:suggest_list'))
+@login_required
+def edit_profile(request):
+    print('here1')
+    if request.method == 'POST':
+        user_form = UserEditForm(data=request.POST or None, instance=request.user)
+        profile_form = ProfileEditForm(data=request.POST or None, instance=request.user.userprofile, files=request.FILES) #??????????????????????????????? user.profile or user.userprofile
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+        else:
+            user_form = UserEditForm(instance=request.user)
+            profile_form = ProfileEditForm(instance=request.user)
+
+        context = {
+            'user_form': user_form,
+            'profile_form': profile_form,
+        }
+        print('here2')
+        return render(request, 'login/edit_profile.html', context) #???????????????????????????????????????
