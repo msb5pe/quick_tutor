@@ -11,6 +11,7 @@ from . import views
 from django.conf.urls import include
 from django.contrib.auth import logout
 
+app_name = 'login'
 
 urlpatterns = [
     path('', include('social_django.urls', namespace='social')),
