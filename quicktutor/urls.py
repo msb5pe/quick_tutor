@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import include, path
 from .views import redirect_root
 
+
 urlpatterns = [
     path('',redirect_root),
     path('login/', include('login.urls')),

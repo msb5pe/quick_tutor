@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 
 def logout_success(request):
     logout(request)
-    return redirect('index')
+    return redirect('login:index')
 
 def index(request):
     #If the user is authenticated, then save user details and logins

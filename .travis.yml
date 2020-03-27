@@ -3,7 +3,6 @@ python:
 - '3.8'
 install:
 - pip install -r requirements-travis.txt
-- pip install python-social-auth[django]
 script:
 - python manage.py test
 deploy:
