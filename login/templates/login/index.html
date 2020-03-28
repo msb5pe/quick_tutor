@@ -63,6 +63,7 @@
         <div class="intro-heading text-uppercase">Sign Up to be a Tutor or Tutee</div>
             {% if user.is_authenticated %}
               <p>Logged as {{ user.username }}</p>
+              
               <a class="btn btn-primary btn-lg" href="{% url 'login:logout' %}">Logout</a>
             <br>
               <a href="{% url 'login:is_tutor' %}">See Tutors!</a>
