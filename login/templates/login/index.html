@@ -65,8 +65,7 @@
               <p>Logged as {{ user.username }}</p>
               
               <a class="btn btn-primary btn-lg" href="{% url 'login:logout' %}">Logout</a>
-            <br>
-              <a href="{% url 'login:create_user' %}">Update profile?</a>
+              
               {% else %}
                 <a class="btn btn-primary btn-lg" href="{% url "login:social:begin" "google-oauth2" %}">
                   Login

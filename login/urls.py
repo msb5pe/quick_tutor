@@ -17,7 +17,4 @@ urlpatterns = [
     path('', include('social_django.urls', namespace='social')),
     path('', views.index, name='index'),
     path('logout/', views.logout_success, name='logout'),
-    path('create_user/', views.create_user, name='create_user'),
-    path('profile/', views.profile, name='profile'),
-    path('edit_profile/', views.edit_profile, name="edit_profile"),
 ]
