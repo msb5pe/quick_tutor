@@ -22,6 +22,7 @@ def index(request):
     #If the user is authenticated, then save user details and logins
     return render(request, 'login/index.html')
 
+<<<<<<< refs/remotes/origin/mattbranch
 
 def create_user(request):
     return render(request, 'login/create_user.html')
@@ -31,3 +32,25 @@ def create_user(request):
 def is_tutor(request):
     return render(request, 'login/is_tutor.html')
 
+=======
+
+# @login_required
+# def edit_profile(request):
+#     print('here1')
+#     if request.method == 'POST':
+#         user_form = UserEditForm(data=request.POST or None, instance=request.user)
+#         profile_form = ProfileEditForm(data=request.POST or None, instance=request.user.userprofile, files=request.FILES) #??????????????????????????????? user.profile or user.userprofile
+#         if user_form.is_valid() and profile_form.is_valid():
+#             user_form.save()
+#             profile_form.save()
+#         else:
+#             user_form = UserEditForm(instance=request.user)
+#             profile_form = ProfileEditForm(instance=request.user)
+
+#         context = {
+#             'user_form': user_form,
+#             'profile_form': profile_form,
+#         }
+#         print('here2')
+#         return render(request, 'login/edit_profile.html', context) #???????????????????????????????????????
+>>>>>>> Updated UserModels

@@ -9,7 +9,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields import ArrayField
 
 class UserProfile(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
@@ -17,11 +16,8 @@ class UserProfile(models.Model):
     last_name = models.CharField(max_length=200)
     email = models.CharField(max_length=255, blank=True)
     date_created = models.DateTimeField('date account created', default=None)
+    picture = models.URLField(max_length=200, default=None)
+    classes = models.CharField(max_length=400, default="None")
+    helped = models.BooleanField(default=False)
     is_tutor = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.user.username
-
-def get_username(self):
-    return self.username
-User.add_to_class("__str__", get_username)
