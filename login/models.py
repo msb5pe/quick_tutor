@@ -17,3 +17,11 @@ class UserProfile(models.Model):
     last_name = models.CharField(max_length=200)
     email = models.CharField(max_length=255, blank=True)
     date_created = models.DateTimeField('date account created', default=None)
+    is_tutor = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
+
+def get_username(self):
+    return self.username
+User.add_to_class("__str__", get_username)
