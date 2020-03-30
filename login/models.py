@@ -21,3 +21,9 @@ class UserProfile(models.Model):
     helped = models.BooleanField(default=False)
     is_tutor = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.user.username
+
+def get_username(self):
+    return self.username
+User.add_to_class("__str__", get_username)
