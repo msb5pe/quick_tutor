@@ -17,5 +17,9 @@ class UserEditForm(forms.ModelForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        exclude = ('user',)
+        exclude = ('user', 'first_name', 'last_name', 'email')
 
+
+class CreateUserForm(forms.Form):
+    isTutor = forms.BooleanField
+    classes = forms.CharField
