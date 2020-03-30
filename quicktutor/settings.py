@@ -38,7 +38,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'AMW0SNMewsnkhblijI2CG0DJ'
 
 LOGIN_URL = '/login/'
 
-LOGIN_REDIRECT_URL = '/login/'
+LOGIN_REDIRECT_URL = '/login/is_tutor'
 LOGOUT_REDIRECT_URL = '/login/logout/'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'login:social'
@@ -70,6 +70,7 @@ AUTHENTICATION_BACKENDS = (
 # Application definition
 
 INSTALLED_APPS = [
+    'home.apps.HomeConfig', # ???
     'login.apps.LoginConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -165,3 +166,7 @@ except ImportError as exc:
 
 #Forgets about the SSL
 del DATABASES['default']['OPTIONS']['sslmode']
+
+
+# Tracks who's currently logged in
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

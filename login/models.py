@@ -19,7 +19,11 @@ class UserProfile(models.Model):
     picture = models.URLField(max_length=200, default=None)
     classes = models.CharField(max_length=400, default="None")
     helped = models.BooleanField(default=False)
-    tutor = models.BooleanField(default=False)
+    is_tutor = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.email
+        return self.user.username
+
+def get_username(self):
+    return self.username
+User.add_to_class("__str__", get_username)
