@@ -15,6 +15,7 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=200)
     email = models.CharField(max_length=255, blank=True)
+    date_created = models.DateTimeField('date account created', default=None)
     picture = models.URLField(max_length=200, default="https://source.unsplash.com/random/200×200/?fruit")
     classes = models.CharField(max_length=400, default="None")
     helped = models.BooleanField(default=False)
