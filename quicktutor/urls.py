@@ -23,5 +23,6 @@ from .views import redirect_root
 urlpatterns = [
     path('',redirect_root),
     path('login/', include('login.urls')),
+    path('home/', include('home.urls')),
     path('admin/', admin.site.urls),
 ]
