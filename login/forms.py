@@ -22,4 +22,5 @@ class ProfileEditForm(forms.ModelForm):
 
 class CreateUserForm(forms.Form):
     isTutor = forms.BooleanField
+    dept = forms.CharField
     classes = forms.CharField

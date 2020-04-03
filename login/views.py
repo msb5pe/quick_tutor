@@ -17,14 +17,17 @@ def logout_success(request):
     logout(request)
     return redirect('login:index')
 
-def index(request):
-    #If the user is authenticated, then save user details and logins
-    return render(request, 'login/index.html')
+class IndexView(generic.TemplateView):
+    template_name = 'login/index.html'
+    context_object_name = 'UserProfile'
 
-def create_user(request):
-    return render(request, 'login/create_user.html')
-    # return HttpResponse("This is where you would create your profile if your email doesn't exist on the server")
+    def get_queryset(self, request):
+        """Return the last five published questions."""
+        print(request)
+        return UserProfile.objects.filter(
+            pub_date__lte=timezone.now()
+            ).order_by('-pub_date')[:5]
 
-def is_tutor(request):
-    return render(request, 'login/is_tutor.html')
 
+def midflowhandler(request):
+    return render(request, 'login/midflow.html')    
