@@ -160,13 +160,10 @@ USE_TZ = True
 try:
     import django_heroku
     django_heroku.settings(locals())
+    # Forgets about the SSL
+    del DATABASES['default']['OPTIONS']['sslmode']
 except ImportError as exc:
     pass
 
 
-#Forgets about the SSL
-del DATABASES['default']['OPTIONS']['sslmode']
 
-
-# Tracks who's currently logged in
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
