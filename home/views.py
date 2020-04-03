@@ -21,14 +21,11 @@ def index(request):
         })
     else:
         if selected_choice == "True":
-
             return HttpResponse("Tutor")
-            # return HttpResponseRedirect(reverse('polls:suggest_list'))
         else:
             user_list = UserProfile.objects.all()
             output = ', '.join([q.user.username for q in user_list])
             return HttpResponse(output)
-            # return HttpResponse("Tutee")
 
 
 # Gets online users
