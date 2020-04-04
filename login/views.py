@@ -13,6 +13,9 @@ from .forms import UserEditForm, ProfileEditForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm
 
+
+
+
 def logout_success(request):
     logout(request)
     return redirect('login:index')
@@ -23,11 +26,17 @@ class IndexView(generic.TemplateView):
 
     def get_queryset(self, request):
         """Return the last five published questions."""
-        print(request)
-        return UserProfile.objects.filter(
-            pub_date__lte=timezone.now()
-            ).order_by('-pub_date')[:5]
+        return UserProfile.objects.filter(user=request.user)
+
+def class_select_isTutor(request):
+    user_profile = UserProfile.objects.filter(user=request.user)
+    user_profile.is_tutor = True
+    user_profile.save()
+    return render(request, 'login/classes.html')
+
+def class_select_isTutee(request):
+    return render(request, 'login/classes.html')
 
 
-def midflowhandler(request):
-    return render(request, 'login/midflow.html')    
+def authflowhandler(request):
+    return render(request, 'login/is_tutor.html')    

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Question Connection</title>
+{% endblock %}
+
+
+{% block navbar %}
+  <ul class="navbar-nav text-uppercase ml-auto">
+    <li class="nav-item">
+      <a class="btn btn-primary btn-sm" href="{% url 'login:logout' %}">Logout</a>
+    </li>
+  </ul>
+{% endblock %}
+
+{% block body %}
+
+<!-- Intro and form -->
+<div class="page-section" id="intro-form-heading">
+      <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+            <img class="img-fluid" width="500" height="300" src="{% static 'login/img/tutor_form/welcome_tutor.jpg' %}" alt="image created by pikisuperstar - www.freepik.com" >
+          <h2 class="section-heading text-uppercase">Hello, {{ user.username }}!</h2>
+          <h3 class="section-subheading text-muted">At Question Connection you can pick between being a tutor or getting help from a tutor</h3>
+          </div>
+      </div>
+
+
+      {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+      <div class="container">
+        <div class="row">
+        <div class="col-sm-4 text-center">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Be a Tutor!</h5>
+              <p class="card-text">Get money helping your peers! They will come to you to get their questions answered.</p>
+              <a href="{% url 'login:tutor' %}" class="btn btn-primary">Tutor</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 text-center">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Get Tutored!</h5>
+              <p class="card-text">Let us know your question and we'll connect you with a tutor that can help.</p>
+              <a href="{% url 'login:tutee' %}" class="btn btn-primary">Get Tutored</a>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+
+</div>
+
+
+
+
+{% endblock %}
