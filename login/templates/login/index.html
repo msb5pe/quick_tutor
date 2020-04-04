@@ -1,16 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
 {% load static %}
 
-<head>
+{% block head %}
+<title>Question Connection</title>
+{% endblock %}
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
 
-  <title>Question Connection</title>
+{% block navbar %}
+  <ul class="navbar-nav text-uppercase ml-auto">
+    <li class="nav-item">
+      <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link js-scroll-trigger" href="#team">Team</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link js-scroll-trigger" href="#login">Login</a>
+    </li>
+  </ul>
+{% endblock %}
 
   <!-- Bootstrap core CSS -->
   <link href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -208,6 +217,4 @@
   <!-- Custom scripts for this template -->
   <script src="{% static 'login/js/agency.min.js' %}"></script>
 
-</body>
-
-</html>
+{% endblock %}
