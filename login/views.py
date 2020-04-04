@@ -29,7 +29,7 @@ class IndexView(generic.TemplateView):
         return UserProfile.objects.filter(user=request.user)
 
 def class_select_isTutor(request):
-    user_profile = UserProfile.objects.filter(user=request.user)
+    user_profile = UserProfile.objects.filter(user=request.user)[0]
     user_profile.is_tutor = True
     user_profile.save()
     return render(request, 'login/classes.html')
