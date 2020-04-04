@@ -10,6 +10,14 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+
+class Location(models.Model):
+    placeName = models.CharField(max_length=100)
+
+    def __str(self):
+        return self.placeName
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
@@ -20,9 +28,11 @@ class UserProfile(models.Model):
     classes = models.CharField(max_length=400, default="None")
     helped = models.BooleanField(default=False)
     is_tutor = models.BooleanField(default=False)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.user.username
+
 
 def get_username(self):
     return self.username
