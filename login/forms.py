@@ -18,3 +18,6 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         exclude = ('user', 'first_name', 'last_name', 'email')
+
+class DeptForm(forms.Form):
+    dept_name = forms.CharField(max_length=100)

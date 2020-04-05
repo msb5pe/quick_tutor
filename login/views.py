@@ -9,12 +9,13 @@ from django.utils import timezone
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth import logout
 from .models import UserProfile
-from .forms import UserEditForm, ProfileEditForm
+from .forms import DeptForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm
+import requests
 
-
-
+def find_user(u):
+    return UserProfile.objects.filter(user=u)[0]
 
 def logout_success(request):
     logout(request)
@@ -23,20 +24,33 @@ def logout_success(request):
 class IndexView(generic.TemplateView):
     template_name = 'login/index.html'
     context_object_name = 'UserProfile'
-
     def get_queryset(self, request):
-        """Return the last five published questions."""
-        return UserProfile.objects.filter(user=request.user)
+        return find_user(request.user)
 
 def class_select_isTutor(request):
-    user_profile = UserProfile.objects.filter(user=request.user)
+    user_profile = find_user(request.user)
     user_profile.is_tutor = True
     user_profile.save()
-    return render(request, 'login/classes.html')
+    return render(request,'login/dept.html')
 
 def class_select_isTutee(request):
-    return render(request, 'login/classes.html')
+    return render(request, 'login/dept.html')
 
+def class_selector(request):
+    user_profile = find_user(request.user)
+    r = requests.get("http://stardock.cs.virginia.edu/louslist/courses/view/" + request.POST['department'] + "?JSON")
+    ret_ary = []
+    for line in r.text.split("\n"):
+        s = line.split(';')
+        try:
+            ret_ary.append(s[0] + " " + s[1])
+        except:
+            pass
+    ret_ary = list(set(ret_ary))
+    if r.status_code == 200:
+        payload = {'classes': ret_ary}
+        return render(request,'login/classes.html', payload)
+    return render(request, 'login/dept.html')
 
 def authflowhandler(request):
     return render(request, 'login/is_tutor.html')    
