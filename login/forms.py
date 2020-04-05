@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 from .models import UserProfile
 
 
+class set_location_form(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        exclude = ("location",)
+
+
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = User

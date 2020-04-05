@@ -1,25 +1,16 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
 
 {% load static %}
 
-{% block head %}
-<title>Question Connection</title>
-{% endblock %}
+<head>
 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-{% block navbar %}
-  <ul class="navbar-nav text-uppercase ml-auto">
-    <li class="nav-item">
-      <a class="nav-link js-scroll-trigger" href="#services">Services</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link js-scroll-trigger" href="#team">Team</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link js-scroll-trigger" href="#login">Login</a>
-    </li>
-  </ul>
-{% endblock %}
+  <title>Question Connection</title>
 
   <!-- Bootstrap core CSS -->
   <link href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -76,6 +67,7 @@
               <a class="btn btn-primary btn-lg" href="{% url 'login:logout' %}">Logout</a>
             <br>
             <div class="row mt-3"></div>
+              <a type="button" class="btn btn-outline-secondary" href="{% url 'home:index' %}">See Tutors!</a>
               {% else %}
                 <a class="btn btn-primary btn-lg" href="{% url "login:social:begin" "google-oauth2" %}">
                   Login
@@ -217,4 +209,6 @@
   <!-- Custom scripts for this template -->
   <script src="{% static 'login/js/agency.min.js' %}"></script>
 
-{% endblock %}
+</body>
+
+</html>

@@ -17,6 +17,9 @@ class Location(models.Model):
     def __str(self):
         return self.placeName
 
+    def getPlaceName(self):
+        return self.placeName
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
@@ -28,7 +31,7 @@ class UserProfile(models.Model):
     classes = models.CharField(max_length=400, default="None")
     helped = models.BooleanField(default=False)
     is_tutor = models.BooleanField(default=False)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
+    location = models.CharField(max_length=200, null=True)
 
     def __str__(self):
         return self.user.username

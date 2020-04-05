@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Location</h2>
+
+<p>Where will you be helping or receiving help?</p>
+
+<form action="{% url 'login:set_location' %}" method="post"> {% csrf_token %}
+  <label for="location">Choose a Location:</label>
+  <select id="location" name="location">
+      {% for location in locations_list %}
+            <option id="location{{ forloop.counter }}" value="{{ location.placeName }}">{{ location.getPlaceName }}</option>
+      {% endfor %}
+  </select>
+  <input type="submit">
+</form>
+
+</body>
+</html>
