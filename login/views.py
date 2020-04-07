@@ -33,18 +33,18 @@ def class_select_isTutor(request):
     user_profile = find_user(request.user)
     user_profile.is_tutor = True
     user_profile.save()
-    # --- Probably should go somewhere else, this is just to write the code out ------
-    locations_list = Location.objects.order_by('placeName')
-    template = loader.get_template('login/locations.html')
-    context = {'locations_list': locations_list,}
-    return render(request, 'login/locations.html', context)
-    # -------------------------------------------------------------------------
-    # return render(request, 'login/classes.html')
-    return render(request,'login/dept.html')
-
+    return render(request,'login/dept.html') # Arvinds change!!!!!!
 
 def select_location(request):
-    user_profile = UserProfile.objects.filter(user=request.user)[0]
+    locations_list = Location.objects.order_by('placeName')
+    template = loader.get_template('login/locations.html')
+    context = {'locations_list': locations_list, }
+    return render(request, 'login/locations.html', context)
+
+# Test function to show the selected location
+# Used with location_test.html
+def select_location2(request):
+    user_profile = find_user(request.user)
     try:
         loc = request.POST.get('location')
         user_profile.location = loc
