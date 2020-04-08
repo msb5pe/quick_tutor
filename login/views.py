@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth import logout
 from .models import UserProfile
-from .forms import DeptForm
+from .forms import ClassesForm
 from .models import UserProfile, Location
 from .forms import set_location_form
 from django.contrib.auth.decorators import login_required
@@ -76,6 +76,17 @@ def class_selector(request):
         payload = {'classes': ret_ary}
         return render(request,'login/classes.html', payload)
     return render(request, 'login/dept.html')
+
+def home_redirect(request):
+    user_profile = find_user(request.user)
+    classes = request.POST.getlist('classes')
+    cls_str = classes[0]
+    for c in classes[1:]:
+        cls_str = cls_str + "," + c
+    user_profile.classes = cls_str
+    user_profile.save() 
+    return redirect('home:index')
+
 
 def authflowhandler(request):
     return render(request, 'login/is_tutor.html')    

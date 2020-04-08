@@ -23,12 +23,12 @@
 
    <body>
       <div class="container-fluid">
-        <form action="{% url 'login:selector' %}" method="post"> {% csrf_token %}
+        <form action="{% url 'login:hrdirect' %}" method="POST"> {% csrf_token %}
          <div class="form-row align-items-center">
             <label>Select Classes</label>
-	        <select class="selectpicker" multiple data-live-search="true">
+	        <select class="selectpicker" multiple data-live-search="true" name="classes">
                 {% for class in classes %}
-                <option>{{class}}</option> 
+                <option value="{{class}}">{{class}}</option> 
                 {% endfor %}
 	        </select>
           </div>
