@@ -15,8 +15,12 @@ app_name = 'login'
 
 urlpatterns = [
     path('', include('social_django.urls', namespace='social')),
-    path('', views.index, name='index'),
+    path('', views.IndexView.as_view(), name='index'),
     path('logout/', views.logout_success, name='logout'),
-    path('create_user/', views.create_user, name='create_user'),
-    path('is_tutor/', views.is_tutor, name='is_tutor'),
+    path('authflow/', views.authflowhandler, name='authflow'),
+    path('tutor/', views.class_select_isTutor, name='tutor'),
+    path('tutee/', views.class_select_isTutee, name='tutee'),
+    path('location_test/', views.select_location, name='set_location'),
+    path('selector/', views.class_selector, name='selector'),
+    path('hrdirect', views.home_redirect, name='hrdirect'),
 ]

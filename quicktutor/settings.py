@@ -38,7 +38,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'AMW0SNMewsnkhblijI2CG0DJ'
 
 LOGIN_URL = '/login/'
 
-LOGIN_REDIRECT_URL = '/login/is_tutor'
+LOGIN_REDIRECT_URL = '/login/authflow/'
 LOGOUT_REDIRECT_URL = '/login/logout/'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'login:social'
@@ -157,16 +157,10 @@ USE_TZ = True
 
 
 # Activate Django-Heroku.
-try:
+if '/quicktutor' in os.environ['HOME']:
     import django_heroku
     django_heroku.settings(locals())
-except ImportError as exc:
-    pass
 
+# Indicates that model UserProfile is the user profile
+AUTH_PROFILE_MODULE = 'login.UserProfile'
 
-#Forgets about the SSL
-del DATABASES['default']['OPTIONS']['sslmode']
-
-
-# Tracks who's currently logged in
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True

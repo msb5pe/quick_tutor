@@ -136,4 +136,4 @@ login/static/login/static/.DS_Store
 
 .env
 
-db.sqlite
+db.sqlite.env

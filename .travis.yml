@@ -5,6 +5,9 @@ install:
 - pip install -r requirements-travis.txt
 script:
 - echo 'DATABASE_URL=sqlite:///db.sqlite3' > .env
+- python manage.py makemigrations
+- python manage.py migrate
+- python manage.py migrate --run-syncdb
 - python manage.py test
 deploy:
   provider: heroku

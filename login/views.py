@@ -1,50 +1,83 @@
 """ V1: Login with Google works """
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.template import loader
-from django.http import Http404
-from django.urls import reverse
 from django.views import generic
-from django.utils import timezone
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect, render
 from django.contrib.auth import logout
-from .models import UserProfile
-from .forms import UserEditForm, ProfileEditForm
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserChangeForm
+from .models import UserProfile, Location
+import requests
+
+def find_user(u):
+    return UserProfile.objects.filter(user=u)[0]
 
 def logout_success(request):
     logout(request)
     return redirect('login:index')
 
-def index(request):
-    #If the user is authenticated, then save user details and logins
-    return render(request, 'login/index.html')
+class IndexView(generic.TemplateView):
+    template_name = 'login/index.html'
+    context_object_name = 'UserProfile'
+    def get_queryset(self, request):
+        return find_user(request.user)
 
-def create_user(request):
-    return render(request, 'login/create_user.html')
-    # return HttpResponse("This is where you would create your profile if your email doesn't exist on the server")
+def class_select_isTutor(request):
+    user_profile = find_user(request.user)
+    user_profile.is_tutor = True
+    user_profile.save()
+    return render(request,'login/dept.html')
 
-def is_tutor(request):
-    return render(request, 'login/is_tutor.html')
+def class_select_isTutee(request):
+    return render(request, 'login/dept.html')
 
+def class_selector(request):
+    user_profile = find_user(request.user)
+    r = requests.get("http://stardock.cs.virginia.edu/louslist/courses/view/" + request.POST['department'] + "?JSON")
+    ret_ary = []
+    for line in r.text.split("\n"):
+        s = line.split(';')
+        try:
+            ret_ary.append(s[0] + " " + s[1])
+        except:
+            pass
+    ret_ary = list(set(ret_ary))
+    if r.status_code == 200:
+        payload = {'classes': ret_ary}
+        return render(request,'login/classes.html', payload)
+    return render(request, 'login/dept.html')
 
-# @login_required
-# def edit_profile(request):
-#     print('here1')
-#     if request.method == 'POST':
-#         user_form = UserEditForm(data=request.POST or None, instance=request.user)
-#         profile_form = ProfileEditForm(data=request.POST or None, instance=request.user.userprofile, files=request.FILES) #??????????????????????????????? user.profile or user.userprofile
-#         if user_form.is_valid() and profile_form.is_valid():
-#             user_form.save()
-#             profile_form.save()
-#         else:
-#             user_form = UserEditForm(instance=request.user)
-#             profile_form = ProfileEditForm(instance=request.user)
+def select_location(request):
+    locations_list = Location.objects.order_by('placeName')
+    template = loader.get_template('login/locations.html')
+    context = {'locations_list': locations_list, }
+    return render(request, 'login/locations.html', context)
 
-#         context = {
-#             'user_form': user_form,
-#             'profile_form': profile_form,
-#         }
-#         print('here2')
-#         return render(request, 'login/edit_profile.html', context) #???????????????????????????????????????
+# Test function to show the selected location
+# Used with location_test.html
+def select_location2(request):
+    user_profile = find_user(request.user)
+    try:
+        loc = request.POST.get('location')
+        user_profile.location = loc
+        user_profile.save()
+    except Exception as e:
+        print(e)
+        return render(request, 'login/locations.html', {
+            'error_message': "Empty text fields",
+        })
+    else:
+        return HttpResponse(loc)
+    # Set location and then redirect!!!
+
+def home_redirect(request):
+    user_profile = find_user(request.user)
+    classes = request.POST.getlist('classes')
+    cls_str = classes[0]
+    for c in classes[1:]:
+        cls_str = cls_str + "," + c
+    user_profile.classes = cls_str
+    user_profile.save()
+    return redirect('home:index')
+
+def authflowhandler(request):
+    return render(request, 'login/is_tutor.html')    

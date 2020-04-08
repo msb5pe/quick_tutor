@@ -48,7 +48,7 @@
             <a class="nav-link js-scroll-trigger" href="#team">Team</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#login">Login</a>
+            <a class="nav-link js-scroll-trigger" href="{% url "login:social:begin" "google-oauth2" %}">Login</a>
           </li>
         </ul>
       </div>
@@ -62,11 +62,12 @@
         <div class="intro-lead-in">Need quick help on schoolwork?</div>
         <div class="intro-heading text-uppercase">Sign Up to be a Tutor or Tutee</div>
             {% if user.is_authenticated %}
-              <p>Logged as {{ user.username }}</p>
-              
+            <img class="mx-auto" src="{{ UserProfile.picture }}" alt="{{ UserProfile.email }}">
+            <p>Logged as {{ user.username }}</p>  
               <a class="btn btn-primary btn-lg" href="{% url 'login:logout' %}">Logout</a>
             <br>
-              <a href="{% url 'login:is_tutor' %}">See Tutors!</a>
+            <div class="row mt-3"></div>
+              <a type="button" class="btn btn-outline-secondary" href="{% url 'home:index' %}">See Tutors!</a>
               {% else %}
                 <a class="btn btn-primary btn-lg" href="{% url "login:social:begin" "google-oauth2" %}">
                   Login
@@ -82,7 +83,7 @@
       <div class="row">
         <div class="col-lg-12 text-center">
           <h2 class="section-heading text-uppercase">Services</h2>
-          <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+          <h3 class="section-subheading text-muted">We connect busy students with other busy students.</h3>
         </div>
       </div>
       <div class="row text-center">
@@ -92,7 +93,7 @@
             <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
           </span>
           <h4 class="service-heading">E-Commerce</h4>
-          <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+          <p class="text-muted">This is just wrong</p>
         </div>
         <div class="col-md-4">
           <span class="fa-stack fa-4x">
@@ -100,7 +101,7 @@
             <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
           </span>
           <h4 class="service-heading">Responsive Design</h4>
-          <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+          <p class="text-muted">We're working on that...</p>
         </div>
         <div class="col-md-4">
           <span class="fa-stack fa-4x">
@@ -108,7 +109,7 @@
             <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
           </span>
           <h4 class="service-heading">Web Security</h4>
-          <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+          <p class="text-muted">sure......</p>
         </div>
       </div>
     </div>
@@ -120,14 +121,14 @@
       <div class="row">
         <div class="col-lg-12 text-center">
           <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
-          <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+          <h3 class="section-subheading text-muted">We chilln</h3>
         </div>
       </div>
 
       <div class="row">
         <div class="col">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/1.jpg' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/arvind.jpg' %}" alt="">
             <h4>Sakhi Singh</h4>
             <p class="text-muted">Scrum Master</p>
           </div>
@@ -135,7 +136,7 @@
 
       <div class="col">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/3.jpg' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/arvind.jpg' %}" alt="">
             <h4>Matt Burkher</h4>
             <p class="text-muted"> Testing </p>
           </div>
@@ -144,7 +145,7 @@
 
         <div class="col">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/2.jpg' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/arvind.jpg' %}" alt="">
             <h4>Alexandra Marquis</h4>
             <p class="text-muted">Requirements Manager</p>
           </div>
@@ -154,7 +155,7 @@
       <div class="row h-100">
       <div class="col">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/3.jpg' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/arvind.jpg' %}" alt="">
             <h4>Arvind Anand</h4>
             <p class="text-muted">Software Architect</p>
           </div>
@@ -162,19 +163,13 @@
 
       <div class="col">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/1.jpg' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/arvind.jpg' %}" alt="">
             <h4>Sean Davidson</h4>
-            <p class="text-muted"> --- </p>
+            <p class="text-muted"> DevOps Manager </p>
           </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-lg-8 mx-auto text-center">
-          <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
-        </div>
-      </div>
-    </div>
   </section>
 
 
@@ -183,26 +178,7 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-4">
-          <span class="copyright">Copyright &copy; Your Website 2019</span>
-        </div>
-        <div class="col-md-4">
-          <ul class="list-inline social-buttons">
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
-            </li>
-          </ul>
+          <span class="copyright">Copyright &copy; SCRUMptious 2020</span>
         </div>
         <div class="col-md-4">
           <ul class="list-inline quicklinks">
