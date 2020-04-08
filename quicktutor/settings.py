@@ -157,11 +157,15 @@ USE_TZ = True
 
 
 # Activate Django-Heroku.
+# Activate Django-Heroku.
 try:
     import django_heroku
     django_heroku.settings(locals())
+    # Forgets about the SSL
+    del DATABASES['default']['OPTIONS']['sslmode']
 except ImportError as exc:
     pass
+
 
 # Indicates that model UserProfile is the user profile
 AUTH_PROFILE_MODULE = 'login.UserProfile'
