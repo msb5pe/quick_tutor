@@ -69,6 +69,7 @@ def select_location2(request):
         })
     else:
         return HttpResponse(loc)
+    # Set location and then redirect!!!
 
 
 def class_select_isTutee(request):
