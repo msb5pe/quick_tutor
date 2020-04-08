@@ -165,5 +165,6 @@ try:
 except ImportError as exc:
     pass
 
-
+# Indicates that model UserProfile is the user profile
+AUTH_PROFILE_MODULE = 'login.UserProfile'
 

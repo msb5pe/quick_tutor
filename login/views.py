@@ -1,19 +1,13 @@
 """ V1: Login with Google works """
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.template import loader
-from django.http import Http404
-from django.urls import reverse
 from django.views import generic
-from django.utils import timezone
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect, render
 from django.contrib.auth import logout
 from .models import UserProfile
-from .forms import ClassesForm
+from .forms import DeptForm
 from .models import UserProfile, Location
-from .forms import set_location_form
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserChangeForm
 import requests
 
 def find_user(u):
@@ -33,7 +27,26 @@ def class_select_isTutor(request):
     user_profile = find_user(request.user)
     user_profile.is_tutor = True
     user_profile.save()
-    return render(request,'login/dept.html') # Arvinds change!!!!!!
+    return render(request,'login/dept.html')
+
+def class_select_isTutee(request):
+    return render(request, 'login/dept.html')
+
+def class_selector(request):
+    user_profile = find_user(request.user)
+    r = requests.get("http://stardock.cs.virginia.edu/louslist/courses/view/" + request.POST['department'] + "?JSON")
+    ret_ary = []
+    for line in r.text.split("\n"):
+        s = line.split(';')
+        try:
+            ret_ary.append(s[0] + " " + s[1])
+        except:
+            pass
+    ret_ary = list(set(ret_ary))
+    if r.status_code == 200:
+        payload = {'classes': ret_ary}
+        return render(request,'login/classes.html', payload)
+    return render(request, 'login/dept.html')
 
 def select_location(request):
     locations_list = Location.objects.order_by('placeName')
@@ -76,17 +89,6 @@ def class_selector(request):
         payload = {'classes': ret_ary}
         return render(request,'login/classes.html', payload)
     return render(request, 'login/dept.html')
-
-def home_redirect(request):
-    user_profile = find_user(request.user)
-    classes = request.POST.getlist('classes')
-    cls_str = classes[0]
-    for c in classes[1:]:
-        cls_str = cls_str + "," + c
-    user_profile.classes = cls_str
-    user_profile.save() 
-    return redirect('home:index')
-
 
 def authflowhandler(request):
     return render(request, 'login/is_tutor.html')    
