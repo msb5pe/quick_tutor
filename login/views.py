@@ -67,6 +67,7 @@ def select_location2(request):
         })
     else:
         return HttpResponse(loc)
+    # Set location and then redirect!!!
 
 def authflowhandler(request):
     return render(request, 'login/is_tutor.html')    

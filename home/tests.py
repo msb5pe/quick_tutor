@@ -8,7 +8,7 @@ class LocationTests(TestCase):
 
     def test_users_are_at_same_location(self):
         """
-
+        Tests whether the users are all at the same location or not
         :return:
         """
         self.user1 = User.objects.create_user(username='testuser1', password='12345')
