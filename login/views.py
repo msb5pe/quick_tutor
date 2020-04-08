@@ -5,8 +5,6 @@ from django.template import loader
 from django.views import generic
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout
-from .models import UserProfile
-from .forms import DeptForm
 from .models import UserProfile, Location
 import requests
 
@@ -70,26 +68,6 @@ def select_location2(request):
     else:
         return HttpResponse(loc)
     # Set location and then redirect!!!
-
-
-def class_select_isTutee(request):
-    return render(request, 'login/dept.html')
-
-def class_selector(request):
-    user_profile = find_user(request.user)
-    r = requests.get("http://stardock.cs.virginia.edu/louslist/courses/view/" + request.POST['department'] + "?JSON")
-    ret_ary = []
-    for line in r.text.split("\n"):
-        s = line.split(';')
-        try:
-            ret_ary.append(s[0] + " " + s[1])
-        except:
-            pass
-    ret_ary = list(set(ret_ary))
-    if r.status_code == 200:
-        payload = {'classes': ret_ary}
-        return render(request,'login/classes.html', payload)
-    return render(request, 'login/dept.html')
 
 def authflowhandler(request):
     return render(request, 'login/is_tutor.html')    
