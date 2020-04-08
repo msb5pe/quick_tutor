@@ -20,7 +20,6 @@ urlpatterns = [
     path('authflow/', views.authflowhandler, name='authflow'),
     path('tutor/', views.class_select_isTutor, name='tutor'),
     path('tutee/', views.class_select_isTutee, name='tutee'),
-    path('location_test/', views.select_location, name='set_location'),
     path('selector/', views.class_selector, name='selector'),
     path('hrdirect', views.home_redirect, name='hrdirect'),
 ]
