@@ -157,7 +157,6 @@ USE_TZ = True
 
 
 # Activate Django-Heroku.
-# Activate Django-Heroku.
 try:
     import django_heroku
     django_heroku.settings(locals())
