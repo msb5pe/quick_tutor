@@ -27,7 +27,7 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=200)
     email = models.CharField(max_length=255, blank=True)
-    # date_created = models.DateTimeField('date account created', default=None)
+    date_created = models.DateTimeField('date account created', default=None)
     picture = models.URLField(max_length=500, default="https://source.unsplash.com/random/200×200/?fruit")
     classes = models.CharField(max_length=400, default="None")
     helped = models.BooleanField(default=False)
@@ -36,12 +36,12 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
-
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
-
-post_save.connect(create_user_profile, sender=User)
+#
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         UserProfile.objects.create(user=instance)
+#
+# post_save.connect(create_user_profile, sender=User)
 
 def get_username(self):
     return self.username
