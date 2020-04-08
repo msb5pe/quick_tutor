@@ -32,11 +32,19 @@
                 {% endfor %}
 	        </select>
           </div>
+            <label for="location">Choose a Location:</label>
+                <select class="selectpicker" multiple data-live-search="true" name="location">
+                    {% for location in locations_list %}
+                        <option id="location{{ forloop.counter }}" value="{{ location.placeName }}">{{ location.getPlaceName }}</option>
+                    {% endfor %}
+                </select>
           <div class="col-auto my-1">
             <button type="submit" class="btn btn-primary">Set</button>
           </div>
         </form>
       </div>
+
+
 
       <!-- Footer -->
       <footer class="py-5 bg-dark">
