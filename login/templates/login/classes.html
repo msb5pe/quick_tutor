@@ -33,7 +33,7 @@
 	        </select>
           </div>
             <label for="location">Choose a Location:</label>
-                <select class="selectpicker" multiple data-live-search="true" name="location">
+                <select class="selectpicker" name="location">
                     {% for location in locations_list %}
                         <option id="location{{ forloop.counter }}" value="{{ location.placeName }}">{{ location.getPlaceName }}</option>
                     {% endfor %}
