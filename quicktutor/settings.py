@@ -157,9 +157,11 @@ USE_TZ = True
 
 
 # Activate Django-Heroku.
-if '/quicktutor' in os.environ['HOME']:
+try:
     import django_heroku
     django_heroku.settings(locals())
+except ImportError as exc:
+    pass
 
 # Indicates that model UserProfile is the user profile
 AUTH_PROFILE_MODULE = 'login.UserProfile'
