@@ -158,10 +158,14 @@ USE_TZ = True
 
 # Activate Django-Heroku.
 try:
-    import django_heroku
-    django_heroku.settings(locals())
-    # Forgets about the SSL
-    del DATABASES['default']['OPTIONS']['sslmode']
+    # import django_heroku
+    # django_heroku.settings(locals())
+    # # Forgets about the SSL
+    # del DATABASES['default']['OPTIONS']['sslmode']
+    if '/quicktutor' in os.environ['HOME']:
+        import django_heroku
+
+        django_heroku.settings(locals())
 except ImportError as exc:
     pass
 

@@ -36,12 +36,12 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
-#
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         UserProfile.objects.create(user=instance)
-#
-# post_save.connect(create_user_profile, sender=User)
+
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+post_save.connect(create_user_profile, sender=User)
 
 def get_username(self):
     return self.username
