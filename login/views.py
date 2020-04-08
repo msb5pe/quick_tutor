@@ -69,5 +69,15 @@ def select_location2(request):
         return HttpResponse(loc)
     # Set location and then redirect!!!
 
+def home_redirect(request):
+    user_profile = find_user(request.user)
+    classes = request.POST.getlist('classes')
+    cls_str = classes[0]
+    for c in classes[1:]:
+        cls_str = cls_str + "," + c
+    user_profile.classes = cls_str
+    user_profile.save()
+    return redirect('home:index')
+
 def authflowhandler(request):
     return render(request, 'login/is_tutor.html')    
