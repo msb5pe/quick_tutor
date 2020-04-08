@@ -4,28 +4,19 @@ from django.contrib.sessions.models import Session
 from django.utils import timezone
 from django.http import HttpResponse
 from django.apps import apps
+from django.views import generic
 
 UserProfile = apps.get_model('login', 'UserProfile')
 
 # Create your views here.
+def find_user(u):
+    return UserProfile.objects.filter(user=u)[0]
 
 
 def index(request):
-    try:
-        selected_choice = request.POST['Tutor']
-    except Exception as e:
-        # Redisplay the question voting form.
-        print(e)
-        return render(request, 'login/is_tutor.html', {
-            'error_message': "Empty text fields",
-        })
-    else:
-        if selected_choice == "True":
-            return HttpResponse("Tutor")
-        else:
-            user_list = UserProfile.objects.all()
-            output = ', '.join([q.user.username for q in user_list])
-            return HttpResponse(output)
+    onlineProfiles = get_current_profiles(request.user)
+    onlineSameLocation = get_same_location(request.user.userprofile.location, onlineProfiles)
+    return HttpResponse(", ".join(str(profile) for profile in onlineSameLocation))
 
 
 # Gets online users
@@ -37,4 +28,18 @@ def get_current_users():
         user_id_list.append(data.get('_auth_user_id', None))
     # Query all logged in users based on id list
     return User.objects.filter(id__in=user_id_list)
+    # return UserProfile.objects.filter(id__in=user_id_list)
+
+def get_current_profiles(user):
+    onlineUsers = get_current_users()
+    onlineProfiles = []
+    for online in onlineUsers:
+        onlineProfiles.append(online.userprofile)
+    return onlineProfiles
+
+def get_same_location(location, profiles):
+    for profile in profiles:
+        if location != profile.location:
+            profiles.remove(profile)
+    return profiles
 
