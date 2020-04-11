@@ -27,13 +27,15 @@ def class_select_isTutor(request):
     user_profile = find_user(request.user)
     user_profile.is_tutor = True
     user_profile.save()
-    return render(request,'login/dept.html')
+    context = {'is_tutor' : True}
+    return render(request, 'login/dept.html', context)
 
 def class_select_isTutee(request):
     user_profile = find_user(request.user)
     user_profile.is_tutor = False
     user_profile.save()
-    return render(request, 'login/dept.html')
+    context = {'is_tutor' : False}
+    return render(request, 'login/dept.html', context)
 
 def class_selector(request):
     locations_list = Location.objects.order_by('placeName')
