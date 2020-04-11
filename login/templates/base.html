@@ -42,15 +42,21 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         {% block navbar %}
         <ul class="navbar-nav text-uppercase ml-auto">
+          {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+            <a class="nav-link js-scroll-trigger" href="{% url 'home:index' %}">Tutors</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#team">Team</a>
+            <a class="nav-link js-scroll-trigger" href="{% url 'login:edit_profile' %}">Edit Profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#login">Login</a>
+            <a class="nav-link js-scroll-trigger" href="{% url 'login:logout' %}">Logout</a>
           </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="{% url "login:social:begin" "google-oauth2" %}">Login</a>
+          </li>
+          {% endif %}
         </ul>
         {% endblock %}
       </div>
