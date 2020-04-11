@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Question Connection</title>
+{% endblock %}
+
+
+{% block navbar %}
+{% endblock %}
+
+{% block body %}
+<section class="page-section" id="edit">
+    <div class="container">
+        <div class="row">
+            <form method="post"> {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

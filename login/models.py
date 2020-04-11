@@ -32,6 +32,8 @@ class UserProfile(models.Model):
     classes = models.CharField(max_length=400, default="None")
     helped = models.BooleanField(default=False)
     is_tutor = models.BooleanField(default=False)
+    # location = models.ForeignKey("Location", null=True, blank=True, on_delete=models.CASCADE)
+    # location = models.OneToOneField(Location, on_delete=models.CASCADE, null=True, blank=True)
     location = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
