@@ -19,16 +19,6 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <br>
-<script>
-   function searchClasses() {
-      var selections = document.getElementById("class_list");
-      var selected_classes = [];
-      for (var i = 0; i < selections.length; i++) {
-          if (selections.options[i].selected) selected_classes.push(selections.options[i].value);
-      }
-      console.log(selected_classes);
-  }
-​</script>
 <div class="page-section" id="intro-form-heading">
    <div class="container">
       <div class=row>
@@ -40,7 +30,7 @@
                      <div class="px-2">
                         <div class="form-row align-items-center">
                            <label>Select Classes:</label>
-                           <select class="selectpicker" multiple data-live-search="true" id="class_list" name="classes" onmousemove=searchClasses();>
+                           <select class="selectpicker" multiple data-live-search="true" id="class_list"  onmousemove="searchClasses()" name="classes">
                               {% for class in classes %}
                               <option value="{{class}}">{{class}}</option>
                               {% endfor %}
@@ -66,7 +56,7 @@
             <div class="column">
                <label>Classes Picked:</label>
                <div class="list-group">
-                  <a href="#" class="list-group-item list-group-item-action">tmp</a>
+                  <span class="badge badge-primary badge-pill">tmp</span>
                </div>
             </div>
          </div>
@@ -75,7 +65,16 @@
 </div>
 
 
-
+<script>
+   function searchClasses() {
+      var selections = document.getElementById("class_list");
+      var selected_classes = [];
+      for (var i = 0; i < selections.length; i++) {
+          if (selections.options[i].selected) selected_classes.push(selections.options[i].value);
+      }
+      console.log(selected_classes);
+  }
+​</script>
 
 
 {% endblock %}
