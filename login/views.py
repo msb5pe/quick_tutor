@@ -6,7 +6,7 @@ from django.views import generic
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout
 from .models import UserProfile, Location
-import requests
+import class_handler
 
 def find_user(u):
     return UserProfile.objects.filter(user=u)[0]
@@ -34,21 +34,10 @@ def class_select_isTutee(request):
     return render(request, 'login/dept.html')
 
 def class_selector(request):
-    user_profile = find_user(request.user)
     locations_list = Location.objects.order_by('placeName')
-    r = requests.get("http://stardock.cs.virginia.edu/louslist/courses/view/" + request.POST['department'] + "?JSON")
-    ret_ary = []
-    for line in r.text.split("\n"):
-        s = line.split(';')
-        try:
-            ret_ary.append(s[0] + " " + s[1])
-        except:
-            pass
-    ret_ary = list(set(ret_ary))
-    if r.status_code == 200:
-        payload = {'classes': ret_ary, 'locations_list': locations_list, }
-        return render(request,'login/classes.html', payload)
-    return render(request, 'login/dept.html')
+    class_list = class_handler.call(request.POST.getlist('departments'))
+    payload = {'classes': class_list, 'locations_list': locations_list, }
+    return render(request,'login/classes.html', payload)
 
 
 def home_redirect(request):
