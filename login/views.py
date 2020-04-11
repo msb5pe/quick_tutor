@@ -54,3 +54,6 @@ def home_redirect(request):
 
 def authflowhandler(request):
     return render(request, 'login/is_tutor.html')    
+
+def authErrorHandler(request):
+    return HttpResponse('Must be an @virginia.edu email')

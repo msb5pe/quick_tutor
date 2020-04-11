@@ -21,5 +21,6 @@ urlpatterns = [
     path('tutor/', views.class_select_isTutor, name='tutor'),
     path('tutee/', views.class_select_isTutee, name='tutee'),
     path('selector/', views.class_selector, name='selector'),
-    path('hrdirect', views.home_redirect, name='hrdirect'),
+    path('hrdirect/', views.home_redirect, name='hrdirect'),
+    path('authentication_error/', views.authErrorHandler, name='authError')
 ]
