@@ -25,6 +25,7 @@ class ClassesForm(forms.Form):
 
 
 class EditProfileForm(UserChangeForm):
+    password = None
 
     class Meta:
         model = UserProfile # may have to be UserProfile
@@ -34,5 +35,9 @@ class EditProfileForm(UserChangeForm):
             'date_created',
             'password',
             'helped',
+            'location',
+            'Password',
+            'first_name',
+            'last_name',
 
         )
