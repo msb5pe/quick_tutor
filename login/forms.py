@@ -46,4 +46,5 @@ class EditProfileForm(forms.ModelForm):
             'first_time_user',
             'helped',
             'picture',
+            'classes',
         )
