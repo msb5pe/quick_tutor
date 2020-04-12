@@ -81,6 +81,7 @@ AUTHENTICATION_BACKENDS = (
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     'home.apps.HomeConfig', # ???
     'login.apps.LoginConfig',
     'django.contrib.admin',
