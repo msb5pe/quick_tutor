@@ -43,3 +43,6 @@ def get_same_location(location, profiles):
             profiles.remove(profile)
     return profiles
 
+
+# onlineProfiles = get_current_profiles(request.user)
+# onlineSameLocation = get_same_location(request.user.userprofile.location, onlineProfiles)
