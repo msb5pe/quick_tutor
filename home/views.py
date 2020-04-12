@@ -16,7 +16,7 @@ def find_user(u):
 def index(request):
     onlineProfiles = get_current_profiles(request.user)
     onlineSameLocation = get_same_location(request.user.userprofile.location, onlineProfiles)
-    return HttpResponse(", ".join(str(profile) for profile in onlineSameLocation))
+    return render(request, 'home/dashboard.html')
 
 
 # Gets online users
