@@ -48,4 +48,5 @@ class EditProfileForm(forms.ModelForm):
             'location',
             'Password',
             'classes',
+            'picture',
         )
