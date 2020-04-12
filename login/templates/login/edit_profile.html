@@ -2,13 +2,15 @@
 
 {% load static %}
 
+{% load crispy_forms_tags %}
 
 {% block body %}
 <section class="page-section" id="edit">
     <div class="container">
         <div class="row">
             <form method="post"> {% csrf_token %}
-                {{ form.as_p }}
+                {{ user_form|crispy }}
+                {{ profile_form|crispy }}
                 <label for="location">Choose a Location:</label>
                 <select class="selectpicker" name="location">
                     {% for location in locations_list %}
