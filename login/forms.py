@@ -45,6 +45,7 @@ class EditProfileForm(forms.ModelForm):
             'date_created',
             'first_time_user',
             'helped',
-            'picture',
+            'location',
+            'Password',
             'classes',
         )
