@@ -23,7 +23,13 @@ if os.path.isfile(dotenv_file):
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIR = (
+    os.path.join(BASE_DIR, 'static')
+)
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/media/'
 
 #Used for Dotenv SQL Lite Test
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -40,6 +46,11 @@ LOGIN_URL = '/login/'
 
 LOGIN_REDIRECT_URL = '/login/authflow/'
 LOGOUT_REDIRECT_URL = '/login/logout/'
+
+# SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS = ['virginia.edu']
+#
+# SOCIAL_AUTH_LOGIN_ERROR_URL = '/login/authentication_error/'
+# SOCIAL_AUTH_BACKEND_ERROR_URL = '/login/authentication_error/'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'login:social'
 

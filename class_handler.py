@@ -9,7 +9,7 @@ def call(depts):
         for line in r.text.split("\n"):
             s = line.split(';')
             try:
-                ret_ary.append(s[0] + " " + s[1])
+                ret_ary.append(s[0] + " " + s[1] + ": " + s[3])
             except:
                 pass
     ret_ary = list(set(ret_ary))

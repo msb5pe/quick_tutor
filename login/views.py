@@ -7,6 +7,8 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import logout
 from .models import UserProfile, Location
 import class_handler
+from django.contrib.auth.forms import UserChangeForm
+from .forms import EditProfileForm
 
 def find_user(u):
     return UserProfile.objects.filter(user=u)[0]
@@ -25,13 +27,15 @@ def class_select_isTutor(request):
     user_profile = find_user(request.user)
     user_profile.is_tutor = True
     user_profile.save()
-    return render(request,'login/dept.html')
+    context = {'is_tutor' : True}
+    return render(request, 'login/dept.html', context)
 
 def class_select_isTutee(request):
     user_profile = find_user(request.user)
     user_profile.is_tutor = False
     user_profile.save()
-    return render(request, 'login/dept.html')
+    context = {'is_tutor' : False}
+    return render(request, 'login/dept.html', context)
 
 def class_selector(request):
     locations_list = Location.objects.order_by('placeName')
@@ -43,7 +47,8 @@ def class_selector(request):
 def home_redirect(request):
     user_profile = find_user(request.user)
     classes = request.POST.getlist('classes')
-    location = request.POST.get('location')
+    location = request.POST.get('location') # original
+    # location = Location.get(pk=request.POST['location'])
     cls_str = classes[0]
     for c in classes[1:]:
         cls_str = cls_str + "," + c
@@ -54,3 +59,21 @@ def home_redirect(request):
 
 def authflowhandler(request):
     return render(request, 'login/is_tutor.html')    
+
+# Not implemented
+def authErrorHandler(request):
+    return HttpResponse('Must be an @virginia.edu email')
+
+def edit_profile(request):
+    locations_list = Location.objects.order_by('placeName')
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/login/authflow/')
+
+    else:
+        form = EditProfileForm(instance=request.user)
+        args = {'form': form, 'locations_list': locations_list,}
+        return render(request, 'login/edit_profile.html', args)

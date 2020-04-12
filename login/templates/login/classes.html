@@ -1,65 +1,107 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Question Connection</title>
+<script>
+   function searchClasses() {
+      var selections = document.getElementById("class_list");
+      var cp = document.getElementById("cp");
+      for (var i = 0; i < selections.length; i++) {
+         var val = selections.options[i];
+          if (val.selected) {
+             if(val.value == "nil"){
+                val.selected = false;
+             } else {
+               if(!document.getElementById(val.value)){
+                  var tmp = document.createElement("span");
+                  tmp.className = "badge badge-primary badge-pill";
+                  tmp.innerText = val.value;
+                  tmp.id = val.value;
+                  cp.appendChild(tmp);
+                  var br = document.createElement("br")
+                  br.id = (val.value + "br")
+                  cp.appendChild(br);
+               }
+             }
+          } else {
+               if(document.getElementById(val.value)){
+                  document.getElementById(val.value).remove();
+                  document.getElementById(val.value+"br").remove();
+               }
+          }
+      }
+
+  }
+</script>
+{% endblock %}
+
+
+{% block navbar %}
+  <ul class="navbar-nav text-uppercase ml-auto">
+    <li class="nav-item">
+      <a class="btn btn-primary btn-sm" href="{% url 'login:logout' %}">Logout</a>
+    </li>
+  </ul>
+{% endblock %}
+
+{% block body %}
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-
-<!DOCTYPE html>
-<html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
-      <meta name="description" content="Tutor Preference">
-      <meta name="author" content="aa2de">
-      <title>QuestionConnection</title>
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-   </head>
-
-   <style>
-    .container {
-        overflow: auto;
-    }
-   </style>
-
-
-   <body>
-      <div class="container-fluid">
-        <form action="{% url 'login:hrdirect' %}" method="POST"> {% csrf_token %}
-         <div class="form-row align-items-center">
-            <label>Select Classes</label>
-	        <select class="selectpicker" multiple data-live-search="true" name="classes">
-                {% for class in classes %}
-                <option value="{{class}}">{{class}}</option>
-                {% endfor %}
-	        </select>
-          </div>
-            <label for="location">Choose a Location:</label>
-                <select class="selectpicker" name="location">
-                    {% for location in locations_list %}
-                        <option id="location{{ forloop.counter }}" value="{{ location.placeName }}">{{ location.getPlaceName }}</option>
-                    {% endfor %}
-                </select>
-          <div class="col-auto my-1">
-            <button type="submit" class="btn btn-primary">Set</button>
-          </div>
-        </form>
-      </div>
-
-
-
-      <!-- Footer -->
-      <footer class="py-5 bg-dark">
-         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; SCRUMptious 2020</p>
+<br>
+<div class="page-section" id="intro-form-heading">
+   <div class="container">
+      <div class=row>
+         <div class="column">
+            <div class="container-fluid">
+               <form action="{% url 'login:hrdirect' %}" method="POST">
+                  {% csrf_token %}
+                  <div class="row">
+                     <div class="px-2">
+                        <div class="form-row align-items-center">
+                           <label>Select Classes:</label>
+                           <select class="selectpicker" multiple data-live-search="true" id="class_list" name="classes">
+                              <option value="nil" selected="selected"></option>
+                              {% for class in classes %}
+                              <option value="{{class}}">{{class}}</option>
+                              {% endfor %}
+                           </select>
+                        </div>
+                     </div>
+                     <div class="px-2">
+                        <label for="location">Choose a Location:</label>
+                        <select class="selectpicker" name="location">
+                           {% for location in locations_list %}
+                           <option id="location{{ forloop.counter }}" value="{{ location.placeName }}">{{ location.getPlaceName }}</option>
+                           {% endfor %}
+                        </select>
+                     </div>
+                  </div>
+                  <div class="col-auto my-1">
+                     <button type="submit" class="btn btn-primary">Set</button>
+                  </div>
+               </form>
+            </div>
          </div>
-      </footer>
+         <div class="px-5">
+            <div class="column">
+               <label>Classes Picked:</label>
+               <div class="list-group" id="cp">
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
 
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-      <!-- Latest compiled and minified JavaScript -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-      <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/i18n/defaults-*.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 
-    </body>
-</html>
+
+<script>
+   $("#class_list").change(searchClasses);
+</script>
+
+
+
+{% endblock %}
