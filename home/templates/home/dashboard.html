@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block body %}
+<br>
+<div class="page-section">
+      <div class="container">
+        <div class="row">
+
+          <!-- Start of Title and toggle -->
+          <div class="col-lg-3">
+              <h3>Notification Center</h3>
+              <!-- Insert toggle button here -->
+              <p>toggle button</p>
+          </div>
+          <!-- End of Title and toggle -->
+
+
+          <!-- Start of Online Tutors -->
+          <div class="col-lg-5 text-left">
+            <br><br><br>
+
+            <!-- Start of hard coded notifications -->
+            <br>
+            <div class="card">
+               <div class="card-body">
+                <p class="card-text"><b>John Doe</b> is looking for a tutor in <b>CS 3240</b></b></p>
+                <p class="card-text">Text <b>(123)-456-7890</b> to contact them.</p>
+               </div>
+            </div>
+
+            <br>
+            <div class="card">
+               <div class="card-body">
+                <p class="card-text"><b>John Doe</b> is looking for a tutor in <b>CS 3240</b></b></p>
+                <p class="card-text">Text <b>(123)-456-7890</b> to contact them.</p>
+               </div>
+            </div>
+            <!-- End of hard coded notifications -->
+          </div>
+          <!-- End of Online Tutors -->
+
+
+          <!-- Start Profile Card -->
+          <div class="col-lg-4 right-align">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Profile</h4>
+                <!-- Insert user's profile info here -->
+                <p class="card-text"><b>Name: </b>Some example text.</p>
+                <p class="card-text"><b>Phone Number: </b>Some example text.</p>
+                <p class="card-text"><b>Tutoring in: </b>Insert Classes</p>
+                <p class="card-text"><b>Location : </b>Enter Location</p>
+
+              </div>
+            </div>
+          </div>
+          <!-- End of Profile Card -->
+
+      </div> <!-- End row div -->
+    </div> <!-- End row container -->
+</div> <!-- End page section div -->
+
+
+
+
+
+{% endblock %}
