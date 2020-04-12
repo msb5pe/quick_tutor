@@ -4,6 +4,37 @@
 
 {% block head %}
 <title>Question Connection</title>
+<script>
+   function searchClasses() {
+      var selections = document.getElementById("class_list");
+      var cp = document.getElementById("cp");
+      for (var i = 0; i < selections.length; i++) {
+         var val = selections.options[i];
+          if (val.selected) {
+             if(val.value == "nil"){
+                val.selected = false;
+             } else {
+               if(!document.getElementById(val.value)){
+                  var tmp = document.createElement("span");
+                  tmp.className = "badge badge-primary badge-pill";
+                  tmp.innerText = val.value;
+                  tmp.id = val.value;
+                  cp.appendChild(tmp);
+                  var br = document.createElement("br")
+                  br.id = (val.value + "br")
+                  cp.appendChild(br);
+               }
+             }
+          } else {
+               if(document.getElementById(val.value)){
+                  document.getElementById(val.value).remove();
+                  document.getElementById(val.value+"br").remove();
+               }
+          }
+      }
+
+  }
+</script>
 {% endblock %}
 
 
@@ -30,7 +61,8 @@
                      <div class="px-2">
                         <div class="form-row align-items-center">
                            <label>Select Classes:</label>
-                           <select class="selectpicker" multiple data-live-search="true" id="class_list"  onmousemove="searchClasses()" name="classes">
+                           <select class="selectpicker" multiple data-live-search="true" id="class_list" name="classes">
+                              <option value="nil" selected="selected"></option>
                               {% for class in classes %}
                               <option value="{{class}}">{{class}}</option>
                               {% endfor %}
@@ -55,8 +87,7 @@
          <div class="px-5">
             <div class="column">
                <label>Classes Picked:</label>
-               <div class="list-group">
-                  <span class="badge badge-primary badge-pill">tmp</span>
+               <div class="list-group" id="cp">
                </div>
             </div>
          </div>
@@ -64,17 +95,13 @@
    </div>
 </div>
 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+
 
 <script>
-   function searchClasses() {
-      var selections = document.getElementById("class_list");
-      var selected_classes = [];
-      for (var i = 0; i < selections.length; i++) {
-          if (selections.options[i].selected) selected_classes.push(selections.options[i].value);
-      }
-      console.log(selected_classes);
-  }
-​</script>
+   $("#class_list").change(searchClasses);
+</script>
+
 
 
 {% endblock %}
