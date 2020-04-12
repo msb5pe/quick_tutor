@@ -37,7 +37,5 @@ class EditProfileForm(UserChangeForm):
             'helped',
             'location',
             'Password',
-            'first_name',
-            'last_name',
 
         )
