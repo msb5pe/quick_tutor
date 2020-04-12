@@ -58,14 +58,14 @@ def home_redirect(request):
     return redirect('home:index')
 
 def authflowhandler(request):
-    return render(request, 'login/is_tutor.html')
-    # user_profile = find_user(request.user)
-    # if user_profile.first_time_user:
-    #     user_profile.first_time_user = False
-    #     user_profile.save()
-    #     return render(request, 'login/edit_profile.html')
-    # else:
-    #     return render(request, 'login/is_tutor.html')
+    # return render(request, 'login/is_tutor.html')
+    user_profile = find_user(request.user)
+    if user_profile.first_time_user:
+        user_profile.first_time_user = False
+        user_profile.save()
+        return redirect('/login/edit')
+    else:
+        return render(request, 'login/is_tutor.html')
 
 # Not implemented
 def authErrorHandler(request):
