@@ -29,6 +29,11 @@ class EditProfileForm(UserChangeForm):
 
     class Meta:
         model = UserProfile # may have to be UserProfile
+        # fields = (
+        #     'first_name',
+        #     'email',
+        #     'is_tutor',
+        # )
         exclude = (
             'user',
             'picture',
@@ -37,5 +42,5 @@ class EditProfileForm(UserChangeForm):
             'helped',
             'location',
             'Password',
-
+            'classes',
         )
