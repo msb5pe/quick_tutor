@@ -13,7 +13,6 @@
           <div class="col-lg-3">
               <h3>Notification Center</h3>
               <!-- Insert toggle button here -->
-              <p>toggle button</p>
           </div>
           <!-- End of Title and toggle -->
 
@@ -24,20 +23,14 @@
 
             <!-- Start of hard coded notifications -->
             <br>
-            <div class="card">
+            {% for student in same_location %}
+            <div class="card" id="{{student.user.username}}">
                <div class="card-body">
-                <p class="card-text"><b>John Doe</b> is looking for a tutor in <b>CS 3240</b></b></p>
-                <p class="card-text">Text <b>(123)-456-7890</b> to contact them.</p>
+                <p class="card-text"><b>{{student.user.first_name}} {{student.user.last_name}}</b> is looking for a tutor in <b>{{student.classes}}</b></b></p>
+                <p class="card-text"> <b>Text {{student.phone}}</b> to contact them.</p>
                </div>
             </div>
-
-            <br>
-            <div class="card">
-               <div class="card-body">
-                <p class="card-text"><b>John Doe</b> is looking for a tutor in <b>CS 3240</b></b></p>
-                <p class="card-text">Text <b>(123)-456-7890</b> to contact them.</p>
-               </div>
-            </div>
+            {% endfor %}
             <!-- End of hard coded notifications -->
           </div>
           <!-- End of Online Tutors -->
@@ -49,10 +42,14 @@
               <div class="card-body">
                 <h4 class="card-title">Profile</h4>
                 <!-- Insert user's profile info here -->
-                <p class="card-text"><b>Name: </b>Some example text.</p>
-                <p class="card-text"><b>Phone Number: </b>Some example text.</p>
-                <p class="card-text"><b>Tutoring in: </b>Insert Classes</p>
-                <p class="card-text"><b>Location : </b>Enter Location</p>
+                <p class="card-text"><b>Name: </b>{{userprofile.user.first_name}} {{userprofile.user.last_name}}</p>
+                <p class="card-text"><b>Phone Number: </b>{{userprofile.phone}}</p>
+                <p class="card-text"><b>Tutoring in: </b>
+                  {% for class in classes %}
+                  <span class="badge badge-primary badge-pill">{{class}}</span>
+                  {% endfor %}
+                </p>
+                <p class="card-text"><b>Location : </b>{{userprofile.location}}</p>
 
               </div>
             </div>

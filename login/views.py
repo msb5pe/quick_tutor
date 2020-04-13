@@ -51,7 +51,8 @@ def home_redirect(request):
     # location = Location.get(pk=request.POST['location'])
     cls_str = classes[0]
     for c in classes[1:]:
-        cls_str = cls_str + "," + c
+        if (c != ""):
+            cls_str = cls_str + "," + c
     user_profile.classes = cls_str
     user_profile.location = location
     user_profile.save()
