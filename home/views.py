@@ -43,17 +43,18 @@ def get_current_profiles(user):
     return onlineProfiles
 
 def get_same_location(location, profiles):
+    locs = []
     for profile in profiles:
-        if location != profile.location:
-            profiles.remove(profile)
-    return profiles
+        if location == profile.location:
+            locs.append(profile)
+    return locs
 
 def get_students_only(users):
-    ret_ary = []
+    students = []
     for u in users:
         if(not u.is_tutor):
-            ret_ary.append(u)
-    return ret_ary
+            students.append(u)
+    return students
         
 
 
