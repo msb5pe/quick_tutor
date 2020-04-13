@@ -17,7 +17,7 @@ def index(request):
     if(user_profile.is_tutor):
         #online_profiles = get_current_profiles(request.user)
         same_location = get_students_only(get_same_location(request.user.userprofile.location, UserProfile.objects.all()))
-        payload = {'userprofile':user_profile, 'same_location':same_location, 'classes':user_profile.classes.split(',')}
+        payload = {'userprofile':user_profile, 'same_location':same_location, 'classes':user_profile.classes.split(', ')}
         return render(request, 'home/dashboard.html', payload)
     else:
         #Notif page
