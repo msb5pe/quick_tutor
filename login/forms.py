@@ -24,23 +24,29 @@ class ClassesForm(forms.Form):
             choices=call_star(args))
 
 
-class EditProfileForm(UserChangeForm):
+class EditUserForm(UserChangeForm):
     password = None
 
     class Meta:
-        model = UserProfile # may have to be UserProfile
-        # fields = (
-        #     'first_name',
-        #     'email',
-        #     'is_tutor',
-        # )
+        model = User # may have to be UserProfile
+        fields = (
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+        )
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
         exclude = (
             'user',
-            'picture',
+            'location',
             'date_created',
-            'password',
+            'first_time_user',
             'helped',
             'location',
             'Password',
             'classes',
+            'picture',
         )

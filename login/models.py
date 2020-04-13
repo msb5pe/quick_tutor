@@ -24,9 +24,6 @@ class Location(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=200)
-    email = models.CharField(max_length=255, blank=True)
     date_created = models.DateTimeField('date account created', default=timezone.now)
     picture = models.URLField(max_length=500, default="https://source.unsplash.com/random/200×200/?fruit")
     classes = models.CharField(max_length=400, default="None")
@@ -35,6 +32,9 @@ class UserProfile(models.Model):
     # location = models.ForeignKey("Location", null=True, blank=True, on_delete=models.CASCADE)
     # location = models.OneToOneField(Location, on_delete=models.CASCADE, null=True, blank=True)
     location = models.CharField(max_length=200, null=True, blank=True)
+    first_time_user = models.BooleanField(default=True)
+    phone = models.CharField(max_length=31)
+
 
     def __str__(self):
         return self.user.username

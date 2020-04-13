@@ -81,6 +81,7 @@ AUTHENTICATION_BACKENDS = (
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     'home.apps.HomeConfig', # ???
     'login.apps.LoginConfig',
     'django.contrib.admin',
@@ -132,6 +133,7 @@ WSGI_APPLICATION = 'quicktutor.wsgi.application'
 #Added Postgres Support
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+
 
 
 # Password validation

@@ -8,7 +8,7 @@ from django.contrib.auth import logout
 from .models import UserProfile, Location
 import class_handler
 from django.contrib.auth.forms import UserChangeForm
-from .forms import EditProfileForm
+from .forms import EditProfileForm, EditUserForm
 
 def find_user(u):
     return UserProfile.objects.filter(user=u)[0]
@@ -51,14 +51,22 @@ def home_redirect(request):
     # location = Location.get(pk=request.POST['location'])
     cls_str = classes[0]
     for c in classes[1:]:
-        cls_str = cls_str + "," + c
+        if (c != ""):
+            cls_str = cls_str + "," + c
     user_profile.classes = cls_str
     user_profile.location = location
     user_profile.save()
     return redirect('home:index')
 
 def authflowhandler(request):
-    return render(request, 'login/is_tutor.html')    
+    # return render(request, 'login/is_tutor.html')
+    user_profile = find_user(request.user)
+    if user_profile.first_time_user:
+        user_profile.first_time_user = False
+        user_profile.save()
+        return redirect('/login/edit')
+    else:
+        return render(request, 'login/is_tutor.html')
 
 # Not implemented
 def authErrorHandler(request):
@@ -67,13 +75,16 @@ def authErrorHandler(request):
 def edit_profile(request):
     locations_list = Location.objects.order_by('placeName')
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user)
+        user_form = EditUserForm(data=request.POST, instance=request.user)
+        profile_form = EditProfileForm(data=request.POST, instance=request.user.userprofile)
 
-        if form.is_valid():
-            form.save()
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
             return redirect('/login/authflow/')
 
     else:
-        form = EditProfileForm(instance=request.user)
-        args = {'form': form, 'locations_list': locations_list,}
+        user_form = EditUserForm(instance=request.user)
+        profile_form = EditProfileForm(instance=request.user.userprofile)
+        args = {'user_form': user_form, 'profile_form': profile_form, 'locations_list': locations_list,}
         return render(request, 'login/edit_profile.html', args)
