@@ -21,7 +21,8 @@ def index(request):
         return render(request, 'home/dashboard.html', payload)
     else:
         #Notif page
-        return HttpResponse("Waiting for tutor....")
+        payload = {'userprofile':user_profile, 'classes':user_profile.classes.split(', ')}
+        return render(request, 'home/loadingpage.html', payload)
 
 
 # Gets online users
