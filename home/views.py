@@ -43,6 +43,7 @@ def get_current_profiles(user):
         onlineProfiles.append(online.userprofile)
     return onlineProfiles
 
+# returns profiles at same location as parameter location
 def get_same_location(location, profiles):
     locs = []
     for profile in profiles:
@@ -50,6 +51,7 @@ def get_same_location(location, profiles):
             locs.append(profile)
     return locs
 
+# takes in profiles?
 def get_students_only(users):
     students = []
     for u in users:
