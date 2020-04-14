@@ -172,7 +172,7 @@ USE_TZ = True
 # Activate Django-Heroku.
 try:
     import django_heroku
-    django_heroku.settings(locals(), test_runner=False) # test runner option to fix travis tests
+    django_heroku.settings(locals()) # test runner option to fix travis tests
     # Forgets about the SSL
     del DATABASES['default']['OPTIONS']['sslmode']
 except ImportError as exc:
