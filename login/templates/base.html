@@ -14,6 +14,7 @@
   {% endblock %}
   <!-- Bootstrap core CSS -->
   <link href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 
   <!-- Custom fonts for this template -->
   <link href="{% static 'login/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -41,15 +42,21 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         {% block navbar %}
         <ul class="navbar-nav text-uppercase ml-auto">
+          {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+            <a class="nav-link js-scroll-trigger" href="{% url 'home:index' %}">Tutors</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#team">Team</a>
+            <a class="nav-link js-scroll-trigger" href="{% url 'login:edit_profile' %}">Edit Profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#login">Login</a>
+            <a class="nav-link js-scroll-trigger" href="{% url 'login:logout' %}">Logout</a>
           </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="{% url "login:social:begin" "google-oauth2" %}">Login</a>
+          </li>
+          {% endif %}
         </ul>
         {% endblock %}
       </div>
@@ -58,6 +65,36 @@
 
 {% block body %}
 {% endblock %}
+
+  <!-- Footer -->
+  <footer class="py-3 bg-dark">
+     <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; SCRUMptious 2020</p>
+     </div>
+  </footer>
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'login/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'login/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="{% static 'login/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+  <!-- Contact form JavaScript -->
+  <script src="{% static 'login/js/jqBootstrapValidation.js' %}"></script>
+  <script src="{% static 'login/js/contact_me.js' %}"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="{% static 'login/js/agency.min.js' %}"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+  <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/i18n/defaults-*.min.js"></script>      
+
+
 </body>
+
 
 </html>

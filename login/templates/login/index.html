@@ -1,59 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
 {% load static %}
 
-<head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Question Connection</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-
-  <!-- Custom fonts for this template -->
-  <link href="{% static 'login/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
-  <link href="{% static 'https://fonts.googleapis.com/css?family=Montserrat:400,700' %}" rel="stylesheet" type="text/css">
-  <link href="{% static 'https://fonts.googleapis.com/css?family=Kaushan+Script' %}" rel='stylesheet' type='text/css'>
-  <link href="{% static 'https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' %}" rel='stylesheet' type='text/css'>
-  <link href="{% static 'https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' %}" rel='stylesheet' type='text/css'>
-
-  <!-- Custom styles for this template -->
-  <link href="{% static 'login/css/agency.css' %}" rel="stylesheet">
-
-</head>
+{% block body %}
 
 <body id="page-top">
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">
-        <img src="{% static 'login/img/logo.png' %}" width="150" height="50">
-      </a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav text-uppercase ml-auto">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#services">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#team">Team</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="{% url "login:social:begin" "google-oauth2" %}">Login</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+
 
   <!-- Header -->
   <header class="masthead">
@@ -64,26 +18,25 @@
             {% if user.is_authenticated %}
             <img class="mx-auto" src="{{ UserProfile.picture }}" alt="{{ UserProfile.email }}">
             <p>Logged as {{ user.username }}</p>  
-              <a class="btn btn-primary btn-lg" href="{% url 'login:logout' %}">Logout</a>
+              <a class="btn btn-primary btn-lg" href="{% url 'login:authflow' %}">Get Started!</a>
             <br>
             <div class="row mt-3"></div>
-              <a type="button" class="btn btn-outline-secondary" href="{% url 'home:index' %}">See Tutors!</a>
               {% else %}
                 <a class="btn btn-primary btn-lg" href="{% url "login:social:begin" "google-oauth2" %}">
-                  Login
+                  Login with your Virginia account!
                 </a>
               {% endif %}
       </div>
     </div>
   </header>
 
-  <!-- Services -->
+  <!-- Services 
   <section class="page-section" id="services">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
           <h2 class="section-heading text-uppercase">Services</h2>
-          <h3 class="section-subheading text-muted">We connect busy students with other busy students.</h3>
+          <h3 class="section-subheading text-muted">We connect busy students with other busy students</h3>
         </div>
       </div>
       <div class="row text-center">
@@ -113,7 +66,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- Team -->
   <section class="bg-light page-section" id="team">
@@ -121,14 +74,13 @@
       <div class="row">
         <div class="col-lg-12 text-center">
           <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
-          <h3 class="section-subheading text-muted">We chilln</h3>
         </div>
       </div>
 
       <div class="row">
         <div class="col">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/arvind.jpg' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/2.jpg' %}" alt="">
             <h4>Sakhi Singh</h4>
             <p class="text-muted">Scrum Master</p>
           </div>
@@ -136,16 +88,16 @@
 
       <div class="col">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/arvind.jpg' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/IMG_8421.JPG' %}" alt="">
             <h4>Matt Burkher</h4>
-            <p class="text-muted"> Testing </p>
+            <p class="text-muted"> Testing Manager</p>
           </div>
         </div>
 
 
         <div class="col">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/arvind.jpg' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/1.jpg' %}" alt="">
             <h4>Alexandra Marquis</h4>
             <p class="text-muted">Requirements Manager</p>
           </div>
@@ -163,52 +115,13 @@
 
       <div class="col">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/arvind.jpg' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/3.jpg' %}" alt="">
             <h4>Sean Davidson</h4>
             <p class="text-muted"> DevOps Manager </p>
           </div>
         </div>
       </div>
-
   </section>
 
+{% endblock %}
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-4">
-          <span class="copyright">Copyright &copy; SCRUMptious 2020</span>
-        </div>
-        <div class="col-md-4">
-          <ul class="list-inline quicklinks">
-            <li class="list-inline-item">
-              <a href="#">Privacy Policy</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">Terms of Use</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="{% static 'login/vendor/jquery/jquery.min.js' %}"></script>
-  <script src="{% static 'login/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-  <!-- Plugin JavaScript -->
-  <script src="{% static 'login/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
-
-  <!-- Contact form JavaScript -->
-  <script src="{% static 'login/js/jqBootstrapValidation.js' %}"></script>
-  <script src="{% static 'login/js/contact_me.js' %}"></script>
-
-  <!-- Custom scripts for this template -->
-  <script src="{% static 'login/js/agency.min.js' %}"></script>
-
-</body>
-
-</html>

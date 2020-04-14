@@ -23,7 +23,13 @@ if os.path.isfile(dotenv_file):
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIR = (
+    os.path.join(BASE_DIR, 'static')
+)
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/media/'
 
 #Used for Dotenv SQL Lite Test
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -40,6 +46,11 @@ LOGIN_URL = '/login/'
 
 LOGIN_REDIRECT_URL = '/login/authflow/'
 LOGOUT_REDIRECT_URL = '/login/logout/'
+
+# SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS = ['virginia.edu']
+#
+# SOCIAL_AUTH_LOGIN_ERROR_URL = '/login/authentication_error/'
+# SOCIAL_AUTH_BACKEND_ERROR_URL = '/login/authentication_error/'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'login:social'
 
@@ -70,6 +81,7 @@ AUTHENTICATION_BACKENDS = (
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     'home.apps.HomeConfig', # ???
     'login.apps.LoginConfig',
     'django.contrib.admin',
@@ -123,6 +135,7 @@ DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -157,9 +170,14 @@ USE_TZ = True
 
 
 # Activate Django-Heroku.
-if '/quicktutor' in os.environ['HOME']:
+try:
     import django_heroku
-    django_heroku.settings(locals())
+    django_heroku.settings(locals()) # test runner option to fix travis tests
+    # Forgets about the SSL
+    del DATABASES['default']['OPTIONS']['sslmode']
+except ImportError as exc:
+    pass
+
 
 # Indicates that model UserProfile is the user profile
 AUTH_PROFILE_MODULE = 'login.UserProfile'

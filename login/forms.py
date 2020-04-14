@@ -1,31 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import UserProfile
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 import requests
-
-
-class set_location_form(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        exclude = ("location",)
-
-
-class UserEditForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = (
-            # 'username',
-            'first_name',
-            'last_name',
-            'email',
-        )
-
-
-class ProfileEditForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        exclude = ('user', 'first_name', 'last_name', 'email')
-
 
 
 def call_star(str):
@@ -45,3 +22,31 @@ class ClassesForm(forms.Form):
         super(ClassesForm, self).__init__(*args, **kwargs)
         self.fields['ClassesForm'] = forms.ChoiceField(
             choices=call_star(args))
+
+
+class EditUserForm(UserChangeForm):
+    password = None
+
+    class Meta:
+        model = User # may have to be UserProfile
+        fields = (
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+        )
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        exclude = (
+            'user',
+            'location',
+            'date_created',
+            'first_time_user',
+            'helped',
+            'location',
+            'Password',
+            'classes',
+            'picture',
+        )

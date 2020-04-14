@@ -3,11 +3,10 @@ python:
 - '3.8'
 install:
 - pip install -r requirements-travis.txt
-script:
+before_script:
 - echo 'DATABASE_URL=sqlite:///db.sqlite3' > .env
-- python manage.py makemigrations
 - python manage.py migrate
-- python manage.py migrate --run-syncdb
+script:
 - python manage.py test
 deploy:
   provider: heroku
