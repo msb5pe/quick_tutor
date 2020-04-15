@@ -58,7 +58,6 @@ def get_students_only(users):
         if(not u.is_tutor):
             students.append(u)
     return students
-        
 
 
 # onlineProfiles = get_current_profiles(request.user)

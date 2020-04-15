@@ -107,3 +107,33 @@ class tutor_tests(TestCase):
         self.correct_profiles.append(self.profile3)
 
         self.assertNotEqual(self.output_profiles, self.correct_profiles)
+
+
+    def test_is_tutor_default(self):
+        self.user1 = User.objects.create_user(username='testuser1', password='12345')
+        self.user2 = User.objects.create_user(username='testuser2', password='12345')
+        self.user3 = User.objects.create_user(username='testuser3', password='12345')
+        self.profile1 = self.user1.userprofile
+        self.profile2 = self.user2.userprofile
+        self.profile3 = self.user3.userprofile
+        self.input_profiles = []
+        self.input_profiles.extend([self.profile1, self.profile2, self.profile3])
+        self.output_profiles = get_students_only(self.input_profiles)
+        self.correct_profiles = []
+        self.correct_profiles.append(self.profile1)
+        self.correct_profiles.append(self.profile2)
+        self.correct_profiles.append(self.profile3)
+        self.assertEqual(self.output_profiles, self.correct_profiles)
+
+class userProfile_test(TestCase):
+
+    def test_get_username_true(self):
+        self.user1 = User.objects.create_user(username='testuser1', password='12345')
+        self.assertEqual('testuser1', self.user1.username)
+
+    def test_get_username_false(self):
+        self.user1 = User.objects.create_user(username='testuser1', password='12345')
+        self.user2 = User.objects.create_user(username='testuser2', password='12345')
+        self.assertNotEqual(self.user1.username, self.user2.username)
+
+
