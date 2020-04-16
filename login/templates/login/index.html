@@ -1,30 +1,127 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
+{% extends 'base.html' %}
 
-  <title>Login</title>
+{% load static %}
 
-  <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
-    crossorigin="anonymous">
-</head>
-<body>
-  <div class="jumbotron">
-    <h1>Login</h1>
-    {% if user.is_authenticated %}
-      <p>Logged as {{ user.username }}</p>
-      <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
-    <br>
-    <a href="{% url 'create_user' %}">Update profile?</a>
-    {% else %}
-      <a class="btn btn-primary" href="{% url "social:begin" "google-oauth2" %}">
-        Login
-      </a>
-    {% endif %}
-  </div>
 
-</body>
-</html>
+{% block body %}
+
+<body id="page-top">
+
+
+
+  <!-- Header -->
+  <header class="masthead">
+    <div class="container">
+      <div class="intro-text">
+        <div class="intro-lead-in">Need quick help on schoolwork?</div>
+        <div class="intro-heading text-uppercase">Sign Up to be a Tutor or Tutee</div>
+            {% if user.is_authenticated %}
+            <img class="mx-auto" src="{{ UserProfile.picture }}" alt="{{ UserProfile.email }}">
+            <p>Logged as {{ user.username }}</p>  
+              <a class="btn btn-primary btn-lg" href="{% url 'login:authflow' %}">Get Started!</a>
+            <br>
+            <div class="row mt-3"></div>
+              {% else %}
+                <a class="btn btn-primary btn-lg" href="{% url "login:social:begin" "google-oauth2" %}">
+                  Login with your Virginia account!
+                </a>
+              {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <!-- Services 
+  <section class="page-section" id="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase">Services</h2>
+          <h3 class="section-subheading text-muted">We connect busy students with other busy students</h3>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-md-4">
+          <span class="fa-stack fa-4x">
+            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+          </span>
+          <h4 class="service-heading">E-Commerce</h4>
+          <p class="text-muted">This is just wrong</p>
+        </div>
+        <div class="col-md-4">
+          <span class="fa-stack fa-4x">
+            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+            <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
+          </span>
+          <h4 class="service-heading">Responsive Design</h4>
+          <p class="text-muted">We're working on that...</p>
+        </div>
+        <div class="col-md-4">
+          <span class="fa-stack fa-4x">
+            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+            <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+          </span>
+          <h4 class="service-heading">Web Security</h4>
+          <p class="text-muted">sure......</p>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Team -->
+  <section class="bg-light page-section" id="team">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="team-member">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/2.jpg' %}" alt="">
+            <h4>Sakhi Singh</h4>
+            <p class="text-muted">Scrum Master</p>
+          </div>
+        </div>
+
+      <div class="col">
+          <div class="team-member">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/IMG_8421.JPG' %}" alt="">
+            <h4>Matt Burkher</h4>
+            <p class="text-muted"> Testing Manager</p>
+          </div>
+        </div>
+
+
+        <div class="col">
+          <div class="team-member">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/1.jpg' %}" alt="">
+            <h4>Alexandra Marquis</h4>
+            <p class="text-muted">Requirements Manager</p>
+          </div>
+        </div>
+        </div>
+
+      <div class="row h-100">
+      <div class="col">
+          <div class="team-member">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/arvind.jpg' %}" alt="">
+            <h4>Arvind Anand</h4>
+            <p class="text-muted">Software Architect</p>
+          </div>
+        </div>
+
+      <div class="col">
+          <div class="team-member">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/3.jpg' %}" alt="">
+            <h4>Sean Davidson</h4>
+            <p class="text-muted"> DevOps Manager </p>
+          </div>
+        </div>
+      </div>
+  </section>
+
+{% endblock %}
+

@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Question Connection</title>
+<script>
+   function searchClasses() {
+      var selections = document.getElementById("class_list");
+      var cp = document.getElementById("cp");
+      for (var i = 0; i < selections.length; i++) {
+         var val = selections.options[i];
+          if (val.selected) {
+             if(val.value == "nil"){
+                val.selected = false;
+             } else {
+               if(!document.getElementById(val.value)){
+                  var tmp = document.createElement("span");
+                  tmp.className = "badge badge-primary badge-pill";
+                  tmp.innerText = val.value;
+                  tmp.id = val.value;
+                  cp.appendChild(tmp);
+                  var br = document.createElement("br")
+                  br.id = (val.value + "br")
+                  cp.appendChild(br);
+               }
+             }
+          } else {
+               if(document.getElementById(val.value)){
+                  document.getElementById(val.value).remove();
+                  document.getElementById(val.value+"br").remove();
+               }
+          }
+      }
+  }
+</script>
+{% endblock %}
+
+
+{% block navbar %}
+  <ul class="navbar-nav text-uppercase ml-auto">
+    <li class="nav-item">
+      <a class="btn btn-primary btn-sm" href="{% url 'login:logout' %}">Logout</a>
+    </li>
+  </ul>
+{% endblock %}
+
+{% block body %}
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<br>
+<div class="page-section" id="intro-form-heading">
+   <div class="container">
+      <div class=row>
+         <div class="column">
+            <div class="container-fluid">
+               <form action="{% url 'login:hrdirect' %}" method="POST">
+                  {% csrf_token %}
+                  <div class="row">
+                     <div class="px-2">
+                        <div class="form-row align-items-center">
+                           <label>Select Classes:</label>
+                           <select class="selectpicker" multiple data-live-search="true" id="class_list" name="classes">
+                              <option value="nil" selected="selected"></option>
+                              {% for class in classes %}
+                              <option value="{{class}}">{{class}}</option>
+                              {% endfor %}
+                           </select>
+                        </div>
+                     </div>
+                     <div class="px-2">
+                        <label for="location">Choose a Location:</label>
+                        <select class="selectpicker" name="location">
+                           {% for location in locations_list %}
+                           <option id="location{{ forloop.counter }}" value="{{ location.placeName }}">{{ location.getPlaceName }}</option>
+                           {% endfor %}
+                        </select>
+                     </div>
+                  </div>
+                  <div class="col-auto my-1">
+                     <button type="submit" class="btn btn-primary">Set</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+         <div class="px-5">
+            <div class="column">
+               <label>Classes Picked:</label>
+               <div class="list-group" id="cp">
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+
+
+<script>
+   $("#class_list").change(searchClasses);
+</script>
+
+
+
+{% endblock %}

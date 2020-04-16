@@ -11,11 +11,17 @@ from . import views
 from django.conf.urls import include
 from django.contrib.auth import logout
 
+app_name = 'login'
 
 urlpatterns = [
     path('', include('social_django.urls', namespace='social')),
-    path('', views.index, name='index'),
+    path('', views.IndexView.as_view(), name='index'),
     path('logout/', views.logout_success, name='logout'),
-    path('create_user/', views.create_user, name='create_user'),
-    path('profile/', views.profile, name='profile')
+    path('authflow/', views.authflowhandler, name='authflow'),
+    path('tutor/', views.class_select_isTutor, name='tutor'),
+    path('tutee/', views.class_select_isTutee, name='tutee'),
+    path('selector/', views.class_selector, name='selector'),
+    path('hrdirect/', views.home_redirect, name='hrdirect'),
+    path('authentication_error/', views.authErrorHandler, name='authError'),
+    path('edit/', views.edit_profile, name='edit_profile'),
 ]

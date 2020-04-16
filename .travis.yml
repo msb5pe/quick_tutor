@@ -3,7 +3,9 @@ python:
 - '3.8'
 install:
 - pip install -r requirements-travis.txt
-- pip install python-social-auth[django]
+before_script:
+- echo 'DATABASE_URL=sqlite:///db.sqlite3' > .env
+- python manage.py migrate
 script:
 - python manage.py test
 deploy:
@@ -13,6 +15,7 @@ deploy:
   app: scrumptious-quicktutor
   on:
     repo: uva-cs3240-s20/project-101-scrumptious
+    branch: master
 branches:
   only: 
     - master
