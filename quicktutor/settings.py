@@ -51,8 +51,8 @@ LOGIN_REDIRECT_URL = '/login/authflow/'
 LOGOUT_REDIRECT_URL = '/login/logout/'
 
 # SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS = ['virginia.edu']
-#
 # SOCIAL_AUTH_LOGIN_ERROR_URL = '/login/authentication_error/'
+# SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 # SOCIAL_AUTH_BACKEND_ERROR_URL = '/login/authentication_error/'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'login:social'
