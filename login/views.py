@@ -94,5 +94,7 @@ def edit_redirect(request):
     user.email = request.POST.get('email')
     user.save()
     user_profile.phone = request.POST.get('phone')
+    if request.FILES.get('profile_pic'):
+        user_profile.profile_pic = request.FILES.get('profile_pic')
     user_profile.save()
     return redirect('/login/authflow/')
