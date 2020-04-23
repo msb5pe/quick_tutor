@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 class Location(models.Model):
     placeName = models.CharField(max_length=100)
 
-    def __str(self):
+    def __str__(self):
         return self.placeName
 
     def getPlaceName(self):

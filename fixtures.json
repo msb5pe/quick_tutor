@@ -1,0 +1,62 @@
+[
+    {
+        "model": "login.Location",
+        "fields": {
+            "placeName": "Alderman Library"
+        }
+    },
+    {
+        "model": "login.Location",
+        "fields": {
+            "placeName": "Clemons Library"
+        }
+    },
+    {
+        "model": "login.Location",
+        "fields": {
+            "placeName": "Clark Library"
+        }
+    },
+    {
+        "model": "login.Location",
+        "fields": {
+            "placeName": "1515"
+        }
+    },
+    {
+        "model": "login.Location",
+        "fields": {
+            "placeName": "Rice Hall"
+        }
+    },
+    {
+        "model": "login.Location",
+        "fields": {
+            "placeName": "Thornton Stacks"
+        }
+    },
+    {
+        "model": "login.Location",
+        "fields": {
+            "placeName": "Ohill"
+        }
+    },
+    {
+        "model": "login.Location",
+        "fields": {
+            "placeName": "Newcomb"
+        }
+    },
+    {
+        "model": "login.Location",
+        "fields": {
+            "placeName": "The Castle"
+        }
+    },
+    {
+        "model": "login.Location",
+        "fields": {
+            "placeName": "Other"
+        }
+    }
+]
