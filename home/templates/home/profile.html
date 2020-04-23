@@ -1,0 +1,22 @@
+{% block body %}
+<!-- Start Profile Card -->
+<div class="col-lg-4 right-align">
+<div class="card">
+    <div class="card-body">
+    <h4 class="card-title">Profile</h4>
+    <!-- Insert user's profile info here -->
+    <p class="card-text"><b>Name: </b>{{userprofile.user.first_name}} {{userprofile.user.last_name}}</p>
+    <p class="card-text"><b>Phone Number: </b>{{userprofile.phone}}</p>
+    <p class="card-text"><b>Classes: </b>
+        {% for class in classes %}
+        <span class="badge badge-primary badge-pill">{{class}}</span>
+        <br>
+        {% endfor %}
+    </p>
+    <p class="card-text"><b>Location : </b>{{userprofile.location}}</p>
+
+    </div>
+</div>
+</div>
+<!-- End of Profile Card -->
+{% endblock %}
