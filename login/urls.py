@@ -23,6 +23,6 @@ urlpatterns = [
     path('selector/', views.class_selector, name='selector'),
     path('hrdirect/', views.home_redirect, name='hrdirect'),
     path('authentication_error/', views.authErrorHandler, name='authError'),
-    path('edit/', views.edit_profile2, name='edit_profile'),
+    path('edit/', views.edit_profile, name='edit_profile'),
     path('edit_redirect/', views.edit_redirect, name='edit_redirect')
 ]

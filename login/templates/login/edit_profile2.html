@@ -15,6 +15,8 @@
                  onerror="this.onerror=null; this.src='defaults/default.jpg'"
                  height="240" width="240">
             {% endif %}
+            <h3>{{ this_user.first_name }} {{ this_user.last_name }}</h3>
+            <h5>{{ this_user.email }}</h5>
 <!--            <h6>Upload a photo...</h6>-->
 
 <!--            <input type="file" class="form-control" name="picture">-->
@@ -32,18 +34,18 @@
           <form action="{% url 'login:edit_redirect' %}" method="POST"
                 class="form-horizontal" role="form" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form-group">
-              <label class="col-lg-3 control-label">First name:</label>
-              <div class="col-lg-8">
-                <input class="form-control" type="text" value="{{ this_user.first_name }}" name="first_name" required>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-lg-3 control-label">Last name:</label>
-              <div class="col-lg-8">
-                <input class="form-control" type="text" value="{{ this_user.last_name }}" name="last_name" required>
-              </div>
-            </div>
+<!--            <div class="form-group">-->
+<!--              <label class="col-lg-3 control-label">First name:</label>-->
+<!--              <div class="col-lg-8">-->
+<!--                <input class="form-control" type="text" value="{{ this_user.first_name }}" name="first_name" required>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--              <label class="col-lg-3 control-label">Last name:</label>-->
+<!--              <div class="col-lg-8">-->
+<!--                <input class="form-control" type="text" value="{{ this_user.last_name }}" name="last_name" required>-->
+<!--              </div>-->
+<!--            </div>-->
             <div class="form-group">
               <label class="col-lg-3 control-label">Email:</label>
               <div class="col-lg-8">
