@@ -9,19 +9,26 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import dj_database_url
-import dotenv
+import psycopg2
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+DEBUG_PROPAGATE_EXCEPTIONS = True
 # Dotenv SQL Lite Test
 dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     DEBUG = True
-    dotenv.load_dotenv(dotenv_file)
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 else:
-    DEBUG = False
+    DEBUG = True
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
@@ -34,8 +41,6 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/images')
 MEDIA_URL = '/media/'
 
-#Used for Dotenv SQL Lite Test
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -72,7 +77,7 @@ SOCIAL_AUTH_PIPELINE = (
 
 
 
-ALLOWED_HOSTS = ['https://test-quicktutor.herokuapp.com/','https://scrumptious-quicktutor.herokuapp.com/']
+ALLOWED_HOSTS = ['*']
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
@@ -132,9 +137,7 @@ WSGI_APPLICATION = 'quicktutor.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-#Added Postgres Support
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+
 
 
 
@@ -175,8 +178,6 @@ USE_TZ = True
 try:
     import django_heroku
     django_heroku.settings(locals()) # test runner option to fix travis tests
-    # Forgets about the SSL
-    del DATABASES['default']['OPTIONS']['sslmode']
 except ImportError as exc:
     pass
 
