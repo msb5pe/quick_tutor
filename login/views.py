@@ -78,7 +78,7 @@ def authErrorHandler(request):
     return render(request, 'login/wrong_email.html')
 
 @login_required()
-def edit_profile2(request):
+def edit_profile(request):
     this_user = request.user
     user_profile = find_user(request.user)
     args = {'this_user': this_user, 'user_profile': user_profile}
@@ -88,8 +88,8 @@ def edit_profile2(request):
 def edit_redirect(request):
     user = request.user
     user_profile = find_user(request.user)
-    user.first_name = request.POST.get('first_name')
-    user.last_name = request.POST.get('last_name')
+    # user.first_name = request.POST.get('first_name')
+    # user.last_name = request.POST.get('last_name')
     user.username = request.POST.get('username')
     user.email = request.POST.get('email')
     user.save()
