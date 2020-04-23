@@ -72,19 +72,36 @@ def authflowhandler(request):
 def authErrorHandler(request):
     return HttpResponse('Must be an @virginia.edu email')
 
-def edit_profile(request):
-    locations_list = Location.objects.order_by('placeName')
-    if request.method == 'POST':
-        user_form = EditUserForm(data=request.POST, instance=request.user)
-        profile_form = EditProfileForm(data=request.POST, instance=request.user.userprofile)
+# def edit_profile(request):
+#     if request.method == 'POST':
+#         user_form = EditUserForm(data=request.POST, instance=request.user)
+#         profile_form = EditProfileForm(data=request.POST, instance=request.user.userprofile)
+#
+#         if user_form.is_valid() and profile_form.is_valid():
+#             user_form.save()
+#             profile_form.save()
+#             return redirect('/login/authflow/')
+#
+#     else:
+#         user_form = EditUserForm(instance=request.user)
+#         profile_form = EditProfileForm(instance=request.user.userprofile)
+#         args = {'user_form': user_form, 'profile_form': profile_form,}
+#         return render(request, 'login/edit_profile.html', args)
 
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            return redirect('/login/authflow/')
+def edit_profile2(request):
+    this_user = request.user
+    user_profile = find_user(request.user)
+    args = {'this_user': this_user, 'user_profile': user_profile}
+    return render(request, 'login/edit_profile2.html', args)
 
-    else:
-        user_form = EditUserForm(instance=request.user)
-        profile_form = EditProfileForm(instance=request.user.userprofile)
-        args = {'user_form': user_form, 'profile_form': profile_form, 'locations_list': locations_list,}
-        return render(request, 'login/edit_profile.html', args)
+def edit_redirect(request):
+    user = request.user
+    user_profile = find_user(request.user)
+    user.first_name = request.POST.get('first_name')
+    user.last_name = request.POST.get('last_name')
+    user.username = request.POST.get('username')
+    user.email = request.POST.get('email')
+    user.save()
+    user_profile.phone = request.POST.get('phone')
+    user_profile.save()
+    return redirect('/login/authflow/')

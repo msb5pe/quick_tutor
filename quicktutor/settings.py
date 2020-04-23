@@ -70,6 +70,8 @@ SOCIAL_AUTH_PIPELINE = (
     'login.pipeline.save_profile'
 )
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['test-quicktutor.herokuapp.com','scrumptious-quicktutor.herokuapp.com']
