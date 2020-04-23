@@ -35,13 +35,14 @@ h6 {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+
 .page-section {
   padding: 100px 0;
+  padding-bottom: 100px;
 }
 
 .page-section h2.section-heading {
   font-size: 40px;
-  margin-top: 0;
   margin-bottom: 15px;
 }
 
@@ -49,10 +50,10 @@ h6 {
   font-size: 16px;
   font-weight: 400;
   font-style: italic;
-  margin-bottom: 75px;
   text-transform: none;
   font-family: 'Droid Serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
 
 @media (min-width: 768px) {
   section {
@@ -184,8 +185,8 @@ header.masthead {
 
 header.masthead .wrap{
   max-width: 200px;
-  padding-left: 10rem;
-  padding-right:10rem;
+  padding-left: 2rem;
+  padding-right:2rem;
   margin: auto;
   text-align: center;
 }
@@ -260,7 +261,7 @@ header.masthead .intro-text .intro-heading {
 }
 
 .team-member {
-  margin-bottom: 50px;
+  margin-bottom: 100px;
   text-align: center;
 }
 
@@ -272,7 +273,7 @@ header.masthead .intro-text .intro-heading {
 
 .team-member h4 {
   margin-top: 25px;
-  margin-bottom: 0;
+  margin-bottom: 25px;
   text-transform: none;
 }
 
@@ -281,8 +282,15 @@ header.masthead .intro-text .intro-heading {
 }
 
 .footer {
-  padding: 25px 0;
   text-align: center;
+  line-height: 100px;
+  position: relative;
+  height: 100px;
+  margin-top: -100px;
+  clear: both;
+  background-color: #0D004C;
+  display: flex;
+  align-items: center;
 }
 
 .footer span.copyright {
@@ -321,9 +329,19 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
   background-color: #fed136;
 }
 
+html,body{
+  height: 100%;
+}
 
-.intro-form-heading {
+#intro-form-heading {
   margin: 15px 0;
   text-transform: none;
+  min-height: 100%;
+  padding-bottom: 100px;
+  overflow: auto;
+}
 
+.card{
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
