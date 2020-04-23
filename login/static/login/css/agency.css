@@ -162,7 +162,7 @@ img::-moz-selection {
   #mainNav.navbar-shrink {
     padding-top: 0;
     padding-bottom: 0;
-    background-color: aliceblue;
+    background-color: white;
   }
   #mainNav.navbar-shrink .navbar-brand {
     font-size: 1.25em;
@@ -171,18 +171,50 @@ img::-moz-selection {
 }
 
 header.masthead {
+  background-color: #0D004C;
   text-align: center;
+  position: relative;
   color: white;
-  background-image : url("../img/header1.jpg");
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center center;
-  background-size: cover;
+  text-shadow: #343a40 4px 4px 6px;
+  height: 95vh;
+  min-height: 25rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+header.masthead .wrap{
+  max-width: 200px;
+  padding-left: 10rem;
+  padding-right:10rem;
+  margin: auto;
+  text-align: center;
+}
+
+header.masthead .full-screen-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+header.masthead .full-screen-video video{
+  min-width: auto;
+  min-height: auto;
 }
 
 header.masthead .intro-text {
-  padding-top: 150px;
-  padding-bottom: 100px;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
 }
 
 header.masthead .intro-text .intro-lead-in {
