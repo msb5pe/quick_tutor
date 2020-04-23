@@ -28,7 +28,7 @@ if os.path.isfile(dotenv_file):
     }
 else:
     DEBUG = True
-    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
