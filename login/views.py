@@ -7,6 +7,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import logout
 from .models import UserProfile, Location
 import class_handler
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm
 from .forms import EditProfileForm, EditUserForm
 
@@ -23,6 +24,7 @@ class IndexView(generic.TemplateView):
     def get_queryset(self, request):
         return find_user(request.user)
 
+@login_required()
 def class_select_isTutor(request):
     user_profile = find_user(request.user)
     user_profile.is_tutor = True
@@ -30,6 +32,7 @@ def class_select_isTutor(request):
     context = {'is_tutor' : True}
     return render(request, 'login/dept.html', context)
 
+@login_required()
 def class_select_isTutee(request):
     user_profile = find_user(request.user)
     user_profile.is_tutor = False
@@ -37,13 +40,14 @@ def class_select_isTutee(request):
     context = {'is_tutor' : False}
     return render(request, 'login/dept.html', context)
 
+@login_required()
 def class_selector(request):
     locations_list = Location.objects.order_by('placeName')
     class_list = class_handler.call(request.POST.getlist('departments'))
     payload = {'classes': class_list, 'locations_list': locations_list, }
     return render(request,'login/classes.html', payload)
 
-
+@login_required()
 def home_redirect(request):
     user_profile = find_user(request.user)
     classes = request.POST.getlist('classes')
@@ -58,6 +62,7 @@ def home_redirect(request):
     user_profile.save()
     return redirect('home:index')
 
+@login_required()
 def authflowhandler(request):
     # return render(request, 'login/is_tutor.html')
     user_profile = find_user(request.user)
@@ -70,21 +75,24 @@ def authflowhandler(request):
 
 # Not implemented
 def authErrorHandler(request):
-    return HttpResponse('Must be an @virginia.edu email')
+    return render(request, 'login/wrong_email.html')
 
-def edit_profile(request):
-    locations_list = Location.objects.order_by('placeName')
-    if request.method == 'POST':
-        user_form = EditUserForm(data=request.POST, instance=request.user)
-        profile_form = EditProfileForm(data=request.POST, instance=request.user.userprofile)
+@login_required()
+def edit_profile2(request):
+    this_user = request.user
+    user_profile = find_user(request.user)
+    args = {'this_user': this_user, 'user_profile': user_profile}
+    return render(request, 'login/edit_profile2.html', args)
 
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            return redirect('/login/authflow/')
-
-    else:
-        user_form = EditUserForm(instance=request.user)
-        profile_form = EditProfileForm(instance=request.user.userprofile)
-        args = {'user_form': user_form, 'profile_form': profile_form, 'locations_list': locations_list,}
-        return render(request, 'login/edit_profile.html', args)
+@login_required()
+def edit_redirect(request):
+    user = request.user
+    user_profile = find_user(request.user)
+    user.first_name = request.POST.get('first_name')
+    user.last_name = request.POST.get('last_name')
+    user.username = request.POST.get('username')
+    user.email = request.POST.get('email')
+    user.save()
+    user_profile.phone = request.POST.get('phone')
+    user_profile.save()
+    return redirect('/login/authflow/')

@@ -26,6 +26,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
     date_created = models.DateTimeField('date account created', default=timezone.now)
     picture = models.URLField(max_length=500, default="https://source.unsplash.com/random/200×200/?fruit")
+    # image = models.ImageField(upload_to='profile_image', blank=True)
     classes = models.CharField(max_length=400, default="None")
     helped = models.BooleanField(default=False)
     is_tutor = models.BooleanField(default=False)
@@ -33,7 +34,7 @@ class UserProfile(models.Model):
     # location = models.OneToOneField(Location, on_delete=models.CASCADE, null=True, blank=True)
     location = models.CharField(max_length=200, null=True, blank=True)
     first_time_user = models.BooleanField(default=True)
-    phone = models.CharField(max_length=31)
+    phone = models.CharField(max_length=31, blank=False)
 
 
     def __str__(self):
