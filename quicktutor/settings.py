@@ -18,7 +18,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Dotenv SQL Lite Test
 dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
+    DEBUG = True
     dotenv.load_dotenv(dotenv_file)
+else:
+    DEBUG = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
@@ -67,10 +70,9 @@ SOCIAL_AUTH_PIPELINE = (
     'login.pipeline.save_profile'
 )
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['test-quicktutor.herokuapp.com','scrumptious-quicktutor.herokuapp.com']
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
