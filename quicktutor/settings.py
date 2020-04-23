@@ -73,7 +73,7 @@ SOCIAL_AUTH_PIPELINE = (
 
 
 
-ALLOWED_HOSTS = ['test-quicktutor.herokuapp.com','scrumptious-quicktutor.herokuapp.com']
+ALLOWED_HOSTS = ['https://test-quicktutor.herokuapp.com/','https://scrumptious-quicktutor.herokuapp.com/']
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
