@@ -7,24 +7,30 @@
   <div class="container">
       <div class="row">
         <!-- left column -->
-<!--        <div class="col-md-3">-->
-<!--          <div class="text-center">-->
-<!--            <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">-->
-<!--            <h6>Upload a different photo...</h6>-->
+        <div class="col-md-3">
+          <div class="text-center">
+            {% if user_profile.profile_pic.url %}
+            <img class="profile-pic rounded-circle"
+                 src="{{ user_profile.profile_pic.url }}"
+                 onerror="this.onerror=null; this.src='defaults/default.jpg'"
+                 height="240" width="240">
+            {% endif %}
+<!--            <h6>Upload a photo...</h6>-->
 
-<!--            <input type="file" class="form-control">-->
-<!--          </div>-->
-<!--        </div>-->
+<!--            <input type="file" class="form-control" name="picture">-->
+          </div>
+        </div>
 
         <!-- edit form column -->
         <div class="col-md-9 personal-info">
+          <h3>Personal info</h3>
           <div class="alert alert-info alert-dismissable">
             <a class="panel-close close" data-dismiss="alert">×</a>
             <i class="fa fa-coffee"></i>
             Fill in some details before moving on!
           </div>
-
-          <form action="{% url 'login:edit_redirect' %}" method="POST" class="form-horizontal" role="form">
+          <form action="{% url 'login:edit_redirect' %}" method="POST"
+                class="form-horizontal" role="form" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
               <label class="col-lg-3 control-label">First name:</label>
@@ -57,6 +63,12 @@
                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                    required>
                 <small>Format: 123-456-7890</small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label">Upload Profile Picture:</label>
+              <div class="col-md-8">
+                <input type="file" class="form-control" name="profile_pic">
               </div>
             </div>
             <div class="form-group">

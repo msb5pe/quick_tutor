@@ -31,7 +31,7 @@ STATICFILES_DIR = (
 )
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/images')
 MEDIA_URL = '/media/'
 
 #Used for Dotenv SQL Lite Test
