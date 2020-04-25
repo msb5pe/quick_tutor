@@ -1,3 +1,3 @@
 release: python manage.py migrate
-python manage.py loaddata fixtures.json
+release: python manage.py loaddata fixtures.json
 web: gunicorn quicktutor.wsgi
