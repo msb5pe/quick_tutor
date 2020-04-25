@@ -50,3 +50,4 @@ class EditProfileForm(forms.ModelForm):
             'classes',
             'picture',
         )
+

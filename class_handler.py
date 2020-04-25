@@ -30,4 +30,5 @@ def avg(classes):
                 pass
     ret_ary = list(set(ret_ary))
     ret_ary.sort()
-    return int(sum(ret_ary)/len(ret_ary)) + 10
+    avg = sum(ret_ary)/len(ret_ary)
+    return int(avg * 1.04) 
