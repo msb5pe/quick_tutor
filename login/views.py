@@ -1,5 +1,3 @@
-""" V1: Login with Google works """
-
 from django.http import HttpResponse
 from django.template import loader
 from django.views import generic
@@ -89,8 +87,8 @@ def edit_profile(request):
 def edit_redirect(request):
     user = request.user
     user_profile = find_user(request.user)
-    # user.first_name = request.POST.get('first_name')
-    # user.last_name = request.POST.get('last_name')
+    user.first_name = request.POST.get('first_name')
+    user.last_name = request.POST.get('last_name')
     user.username = request.POST.get('username')
     user.email = request.POST.get('email')
     user.save()
