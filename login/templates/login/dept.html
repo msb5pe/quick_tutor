@@ -9,20 +9,20 @@
       $('.selectpicker').selectpicker('mobile');
    }
    class Stack{
-      constructor() { 
-        this.stack = []; 
-      } 
+      constructor() {
+        this.stack = [];
+      }
       push(val){
          if(!this.stack.includes(val)){
             this.stack.push(val);
          }
       }
-      pop(){ 
-         if(this.stack.length == 0){ 
-            return "Underflow"; 
+      pop(){
+         if(this.stack.length == 0){
+            return "Underflow";
          }
-         return this.stack.pop(); 
-      } 
+         return this.stack.pop();
+      }
       length(){
          return this.stack.length;
       }
@@ -34,7 +34,7 @@
     count++;
     var div = document.getElementById("add");
     var search_element = document.createElement("input")
-    search_element.type = "text";    
+    search_element.type = "text";
     search_element.id = count;
     search_element.className = "form-control";
     search_element.placeholder = "ex:CS,APMA,COMM,etc..";
@@ -104,4 +104,3 @@
 
 
 {% endblock %}
-

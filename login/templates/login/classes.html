@@ -10,20 +10,20 @@
    }
 
    class Queue{
-      constructor() { 
-        this.queue = []; 
-      } 
+      constructor() {
+        this.queue = [];
+      }
       enqueue(val){
          if(!this.queue.includes(val)){
             this.queue.push(val);
          }
       }
-      dequeue(){ 
-         if(this.queue.length == 0){ 
-            return "Underflow"; 
+      dequeue(){
+         if(this.queue.length == 0){
+            return "Underflow";
          }
-         return this.queue.shift(); 
-      } 
+         return this.queue.shift();
+      }
       length(){
          return this.queue.length;
       }
@@ -91,14 +91,22 @@
    <div class="container">
       <div class=row>
          <div class="column px-3">
-            <h2>Select up to 5 classes you need help in</h2>
+            {% if not is_tutor %}
+            <h2>Select the class that you need help in: </h2>
+            {% else %}
+            <h2>Select up to 5 classes that you can help in: </h2>
+            {% endif %}
             <div class="container-fluid">
                <form action="{% url 'home:create_request' %}" method="POST">
                   {% csrf_token %}
                   <div class="row">
                      <div class="form-group px-2">
                         <div class="form-row align-items-center">
+                           {% if is_tutor %}
                            <label>Select Classes:</label>
+                           {% else %}
+                           <label>Select Class:</label>
+                           {% endif %}
                            <select class="selectpicker" multiple data-live-search="true" id="class_list" name="classes">
                               <option value="nil" selected="selected"></option>
                               {% for class in classes %}
@@ -125,7 +133,11 @@
          <div class="card">
             <div class="px-2">
                <div class="column">
+                  {% if is_tutor %}
                   <label>Classes Picked:</label>
+                  {% else %}
+                  <label>Class Picked:</label>
+                  {% endif %}
                   <div class="list-group" id="cp">
                   </div>
                </div>

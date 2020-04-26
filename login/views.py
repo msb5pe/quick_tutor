@@ -44,7 +44,7 @@ def class_select_isTutee(request):
 def class_selector(request):
     locations_list = Location.objects.order_by('placeName')
     class_list = class_handler.call(request.POST.getlist('dept'))
-    payload = {'classes': class_list, 'locations_list': locations_list}
+    payload = {'classes': class_list, 'locations_list': locations_list, 'is_tutor' : find_user(request.user).is_tutor}
     return render(request,'login/classes.html', payload)
 
 @login_required()
