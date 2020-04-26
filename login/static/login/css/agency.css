@@ -396,3 +396,7 @@ html,body{
 #add-remove-btns{
   margin-bottom: 10px;
 }
+
+#class-pick{
+  min-width: 350px;
+}
