@@ -107,7 +107,11 @@
                            {% else %}
                            <label>Select Class:</label>
                            {% endif %}
+                           {% if is_tutor %}
                            <select class="selectpicker" multiple data-live-search="true" id="class_list" name="classes">
+                           {% else %}
+                           <select class="selectpicker" data-live-search="true" id="class_list" name="classes">
+                           {% endif %}
                               <option value="nil" selected="selected"></option>
                               {% for class in classes %}
                               <option value="{{class}}">{{class}}</option>
