@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.http import HttpResponse
 from django.apps import apps
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 
 UserProfile = apps.get_model('login', 'UserProfile')
 
@@ -52,12 +53,15 @@ def get_same_location(location, profiles):
     return locs
 
 # takes in profiles?
+# @login_required()
 def get_students_only(users):
     students = []
     for u in users:
         if(not u.is_tutor):
             students.append(u)
     return students
+
+
 
 
 # onlineProfiles = get_current_profiles(request.user)

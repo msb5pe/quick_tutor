@@ -78,6 +78,7 @@ AUTHENTICATION_BACKENDS = (
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap_modal_forms',
     'crispy_forms',
     'home.apps.HomeConfig', # ???
     'login.apps.LoginConfig',
