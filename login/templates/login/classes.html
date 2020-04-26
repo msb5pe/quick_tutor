@@ -93,7 +93,7 @@
          <div class="column px-3">
             <h2>Select up to 5 classes you need help in</h2>
             <div class="container-fluid">
-               <form action="{% url 'login:hrdirect' %}" method="POST">
+               <form action="{% url 'home:create_request' %}" method="POST">
                   {% csrf_token %}
                   <div class="row">
                      <div class="form-group px-2">

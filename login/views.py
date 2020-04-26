@@ -62,6 +62,7 @@ def home_redirect(request):
     user_profile.save()
     return redirect('home:index')
 
+
 @login_required()
 def authflowhandler(request):
     # return render(request, 'login/is_tutor.html')
