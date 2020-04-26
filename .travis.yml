@@ -6,6 +6,7 @@ install:
 before_script:
 - echo 'DATABASE_URL=sqlite:///db.sqlite3' > .env
 - python manage.py migrate
+- python manage.py loaddata fixtures.json
 script:
 - python manage.py test
 deploy:

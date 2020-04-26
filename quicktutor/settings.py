@@ -89,6 +89,7 @@ AUTHENTICATION_BACKENDS = (
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap_modal_forms',
     'crispy_forms',
     'home.apps.HomeConfig', # ???
     'login.apps.LoginConfig',
@@ -182,6 +183,20 @@ try:
     django_heroku.settings(locals()) # test runner option to fix travis tests
 except ImportError as exc:
     pass
+
+DATABASES = {}
+
+# Dotenv SQL Lite Test
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+else:
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 
 # Indicates that model UserProfile is the user profile
