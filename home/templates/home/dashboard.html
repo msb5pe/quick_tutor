@@ -40,7 +40,7 @@ jQuery(document).ready(function(e){
         </div>
     </div>
 </div>
-<div class="page-section">
+<div class="page-section" id="notification-center">
       <div class="container">
         <div class="row">
 
@@ -54,7 +54,6 @@ jQuery(document).ready(function(e){
 
           <!-- Start of Online Tutors -->
           <div class="col-lg-5 text-left">
-            <br><br><br>
 
             <!-- Start of hard coded notifications -->
             <br>
@@ -81,7 +80,7 @@ jQuery(document).ready(function(e){
           <!-- Start Profile Card -->
           <div class="col-lg-4 right-align">
             <div class="card">
-              <div class="card-body">
+              <div class="card-body position-sticky" id="profile-card">
                 <h4 class="card-title">Profile</h4>
                 <!-- Insert user's profile info here -->
                 <p class="card-text"><b>Name: </b>{{userprofile.user.first_name}} {{userprofile.user.last_name}}</p>
