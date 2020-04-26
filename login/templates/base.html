@@ -44,7 +44,7 @@
         <ul class="navbar-nav text-uppercase ml-auto">
           {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="{% url 'home:index' %}">Tutors</a>
+            <a class="nav-link js-scroll-trigger" href="{% url 'login:authflow' %}">Tutors</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="{% url 'login:edit_profile' %}">Edit Profile</a>
@@ -74,6 +74,8 @@
      </div>
   </footer>
 
+
+  <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
 
   <!-- Bootstrap core JavaScript -->
   <script src="{% static 'login/vendor/jquery/jquery.min.js' %}"></script>
