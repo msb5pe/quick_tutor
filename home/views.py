@@ -34,8 +34,9 @@ def create_request(request):
         if (c != ""):
             cls_str = cls_str + "," + c
     if not request.user.userprofile.is_tutor:
-        new_request = TutorRequest(user=request.user, phone=request.user.userprofile.phone,
-                                    classes=cls_str, location=loc)
+        if TutorRequest.objects.filter(user=request.user):
+            TutorRequest.objects.filter(user=request.user).delete()
+        new_request = TutorRequest(user=request.user, phone=request.user.userprofile.phone, classes=cls_str, location=loc)
         new_request.save()
     user_profile.classes = cls_str
     user_profile.location = loc
