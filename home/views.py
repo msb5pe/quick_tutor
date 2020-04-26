@@ -12,7 +12,7 @@ UserProfile = apps.get_model('login', 'UserProfile')
 def find_user(u):
     return UserProfile.objects.filter(user=u)[0]
 
-
+@login_required()
 def index(request):
     user_profile = find_user(request.user)
     if(user_profile.is_tutor):
@@ -52,11 +52,10 @@ def get_same_location(location, profiles):
             locs.append(profile)
     return locs
 
-# takes in profiles?
-# @login_required()
-def get_students_only(users):
+# takes in and returns profiles?
+def get_students_only(profiles):
     students = []
-    for u in users:
+    for u in profiles:
         if(not u.is_tutor):
             students.append(u)
     return students
