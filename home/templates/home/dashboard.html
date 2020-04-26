@@ -46,7 +46,7 @@ jQuery(document).ready(function(e){
 
           <!-- Start of Title and toggle -->
           <div class="col-lg-3">
-              <h3>Notification Center (requests from {{userprofile.location}})</h3>
+              <h3>Notification Center</h3>
               <!-- Insert toggle button here -->
           </div>
           <!-- End of Title and toggle -->
@@ -59,7 +59,7 @@ jQuery(document).ready(function(e){
             <!-- Start of hard coded notifications -->
             <br>
 <!--              same_location is a list of requests-->
-            {% for student in same_location %}
+            {% for student in same_classes %}
             <div class="card" id="{{student.user.username}}">
                <div class="card-body">
                    <div class="text-center">
