@@ -108,6 +108,21 @@ img::-moz-selection {
   box-shadow: 0 0 0 0.2rem #5189BF !important;
 }
 
+.btn-outline {
+  background-color: #0d004c;
+  border-color: #0d004c;
+}
+
+.btn-outline:active, .btn-outline:focus, .btn-outline:hover {
+  background-color: #5189BF !important;
+  border-color: #5189BF !important;
+  color: white;
+}
+
+.btn-outline:active, .btn-outline:focus {
+  box-shadow: 0 0 0 0.2rem #5189BF !important;
+}
+
 #mainNav {
   background-color: #5189BF;
 }
@@ -281,7 +296,7 @@ header.masthead .intro-text .intro-heading {
   margin-top: 0;
 }
 
-.footer {
+.footer, .push {
   text-align: center;
   line-height: 100px;
   position: relative;
