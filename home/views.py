@@ -18,16 +18,12 @@ def find_user(u):
 def index(request):
     user_profile = find_user(request.user)
     if(user_profile.is_tutor):
-        #online_profiles = get_current_profiles(request.user)
-        # same_location = get_students_only(get_same_location(request.user.userprofile.location, UserProfile.objects.all()))
-        same_location = get_requests(request.user.userprofile.location)
-        payload = {'userprofile':user_profile, 'same_location':same_location, 'classes':user_profile.classes.split(',')}
+        same_classes = get_requests(user_profile.classes)
+        payload = {'userprofile':user_profile, 'same_classes':same_classes, 'classes':user_profile.classes.split(',')}
         return render(request, 'home/dashboard.html', payload)
     else:
-        #Notif page
         payload = {'userprofile':user_profile, 'classes':user_profile.classes.split(',')}
         return render(request, 'home/loadingpage.html', payload)
-
 
 def create_request(request):
     user_profile = find_user(request.user)
@@ -38,9 +34,12 @@ def create_request(request):
         if (c != ""):
             cls_str = cls_str + "," + c
     if not request.user.userprofile.is_tutor:
-        new_request = TutorRequest(user=request.user, phone=request.user.userprofile.phone,
-                                    classes=cls_str, location=loc)
+        if TutorRequest.objects.filter(user=request.user):
+            TutorRequest.objects.filter(user=request.user).delete()
+        new_request = TutorRequest(user=request.user, phone=request.user.userprofile.phone, classes=cls_str, location=loc)
         new_request.save()
+
+
     user_profile.classes = cls_str
     user_profile.location = loc
     user_profile.save()
@@ -55,7 +54,6 @@ def get_current_users():
         user_id_list.append(data.get('_auth_user_id', None))
     # Query all logged in users based on id list
     return User.objects.filter(id__in=user_id_list)
-    #return UserProfile.objects.filter(id__in=user_id_list)
 
 def get_current_profiles(user):
     onlineUsers = get_current_users()
@@ -79,23 +77,26 @@ def get_students_only(profiles):
         if(not u.is_tutor):
             students.append(u)
     return students
-
+    
 # returns all requests in the same location
-def get_requests(location):
-    locs = []
+def get_requests(classes):
+    students = []
     tutor_requests = TutorRequest.objects.all()
     for profile in tutor_requests:
-        if location == profile.location:
-            locs.append(profile)
-    return locs
-
+        student_classes = profile.classes.split(',')
+        class_ls = classes.split(',')
+        if intersection(class_ls, student_classes):
+            students.append(profile)
+    return students
+    
+def intersection(l1, l2):
+    res = list(filter(lambda x: x in l1, l2))
+    return res
 
 # Delete request object
 def delete_request(request):
-    request.POST.get('location')
-    return redirect('home:index')
-
-
+    TutorRequest.objects.filter(user=request.user).delete()
+    return redirect('login:authflow')
 
 
 # onlineProfiles = get_current_profiles(request.user)

@@ -361,3 +361,26 @@ html,body{
   margin-bottom: 30px;
 }
 
+#search-button{
+  min-width: 50%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#add{
+  min-width: 50%;
+  margin-top: 10px;
+}
+
+#dept_img{
+  z-index: -1;
+  margin-top: -100px;
+}
+
+#dept-container{
+  margin: 15px 0;
+  text-transform: none;
+  min-height: 95%;
+  padding-bottom: 100px;
+  overflow: auto;
+}

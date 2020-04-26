@@ -46,7 +46,7 @@ jQuery(document).ready(function(e){
 
           <!-- Start of Title and toggle -->
           <div class="col-lg-3">
-              <h3>Notification Center (requests from {{userprofile.location}})</h3>
+              <h3>Notification Center</h3>
               <!-- Insert toggle button here -->
           </div>
           <!-- End of Title and toggle -->
@@ -59,11 +59,11 @@ jQuery(document).ready(function(e){
             <!-- Start of hard coded notifications -->
             <br>
 <!--              same_location is a list of requests-->
-            {% for student in same_location %}
+            {% for student in same_classes %}
             <div class="card" id="{{student.user.username}}">
                <div class="card-body">
                    <div class="text-center">
-                       <p class="card-text"><b>{{student.user.first_name}} {{student.user.last_name}}</b> is looking for a tutor in <b>{{student.classes}}</b></b></p>
+                       <p class="card-text"><b>{{student.user.first_name}} {{student.user.last_name}}</b> is looking for a tutor in: <br><b>{{student.classes}}</b></b></p>
                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
                                data-recip="{{student.phone}}" data-first="{{student.user.first_name}}"
                                data-username="{{student.user.username}}" value="{{student.id}}">

@@ -42,7 +42,7 @@ def class_select_isTutee(request):
 def class_selector(request):
     locations_list = Location.objects.order_by('placeName')
     class_list = class_handler.call(request.POST.getlist('dept'))
-    payload = {'classes': class_list, 'locations_list': locations_list}
+    payload = {'classes': class_list, 'locations_list': locations_list, 'is_tutor' : find_user(request.user).is_tutor}
     return render(request,'login/classes.html', payload)
 
 @login_required()
@@ -87,8 +87,8 @@ def edit_profile(request):
 def edit_redirect(request):
     user = request.user
     user_profile = find_user(request.user)
-    # user.first_name = request.POST.get('first_name')
-    # user.last_name = request.POST.get('last_name')
+    user.first_name = request.POST.get('first_name')
+    user.last_name = request.POST.get('last_name')
     user.username = request.POST.get('username')
     user.email = request.POST.get('email')
     user.save()
