@@ -125,15 +125,36 @@ class tutor_tests(TestCase):
         self.correct_profiles.append(self.profile3)
         self.assertEqual(self.output_profiles, self.correct_profiles)
 
-class userProfile_test(TestCase):
+class userprofile_test(TestCase):
 
-    def test_get_username_true(self):
+    def createusertest(self):
         self.user1 = User.objects.create_user(username='testuser1', password='12345')
-        self.assertEqual('testuser1', self.user1.username)
+        self.profile1 = self.user1.userprofile
+        self.assertEqual(self.find_user(self.profile1), self.profile1)
 
-    def test_get_username_false(self):
+    def find_user_test(self):
         self.user1 = User.objects.create_user(username='testuser1', password='12345')
+        self.profile1 = self.user1.userprofile
         self.user2 = User.objects.create_user(username='testuser2', password='12345')
-        self.assertNotEqual(self.user1.username, self.user2.username)
+        self.profile2 = self.user2.userprofile
+        self.assertNotEqual(self.find_user(self.profile2), self.profile1)
 
+    def add_location_test(self):
+        self.user1 = User.objects.create_user(username='testuser1', password='12345')
+        self.profile1 = self.user1.userprofile
+        self.profile1.location = 'Alderman'
+        self.assertEqual('Alderman',self.profile1.location)
+
+    def helped_test(self):
+        self.user1 = User.objects.create_user(username='testuser1', password='12345')
+        self.profile1 = self.user1.userprofile
+        self.profile1.helped = False
+        self.assertEqual(False,self.profile1.helped)
+        self.profil1.helped = True
+        self.assertEqual(True, self.profile1.helped)
+
+    def firsttimeuser_test(self):
+        self.usernew = User.objects.create_user(username='testusernew', password='12345')
+        self.profilenew = self.usernew.userprofile
+        self.assertEqual(True, self.profile1.first_time_user)
 
