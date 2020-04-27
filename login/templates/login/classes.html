@@ -87,10 +87,10 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <br>
-<div class="page-section" id="intro-form-heading">
+<div class="page-section" id="dept-container">
    <div class="container">
       <div class=row>
-         <div class="column px-3">
+         <div class="column pxy-3">
             {% if not is_tutor %}
             <h2>Select the class that you need help in: </h2>
             {% else %}
@@ -101,7 +101,7 @@
                   {% csrf_token %}
                   <div class="row">
                      <div class="form-group px-2">
-                        <div class="form-row align-items-center">
+                        <div class="form-row align-items-center pt-4">
                            {% if is_tutor %}
                            <label>Select Classes:</label>
                            {% else %}
@@ -119,7 +119,7 @@
                            </select>
                         </div>
                      </div>
-                     <div class="form-group px-2">
+                     <div class="form-group px-2 pt-4" >
                         <label for="location">Choose a Location:</label>
                         <select class="selectpicker" name="location">
                            {% for location in locations_list %}
@@ -129,12 +129,12 @@
                      </div>
                   </div>
                   <div class="form-group my-1">
-                     <button type="submit" class="btn btn-primary">Set</button>
+                     <button type="submit" class="btn btn-primary" style="min-width: 30%;">Set</button>
                   </div>
                </form>
             </div>
          </div>
-         <div class="card">
+         <div class="card" id="class-pick">
             <div class="px-2">
                <div class="column">
                   {% if is_tutor %}
