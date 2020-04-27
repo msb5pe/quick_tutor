@@ -359,6 +359,7 @@ html,body{
 .card{
   margin-top: 30px;
   margin-bottom: 30px;
+  background-color: #ecf2f8;
 }
 
 #search-button{
@@ -416,5 +417,4 @@ html,body{
   min-height: 100%;
   padding-bottom: 100px;
   overflow: auto;
-  background-color: #ecf2f8;
 }
