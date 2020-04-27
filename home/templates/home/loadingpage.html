@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block body %}
 <br>
@@ -10,7 +11,8 @@
             <h1 class="section-heading text">Waiting for tutor...</h1>
             <p>A tutor will contact you via your phone number to set up a tutoring session.</p>
             <!-- <iframe src="https://giphy.com/embed/hr1YxQKno3Di0" width="480" height=“288” frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/web-design-hr1YxQKno3Di0">via GIPHY</a></p>-->
-            <iframe src="https://giphy.com/embed/XcShQfTsYfiutswpoI" width="300" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/XcShQfTsYfiutswpoI"></a></p> 
+<!--            <iframe src="https://giphy.com/embed/XcShQfTsYfiutswpoI" width="300" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/XcShQfTsYfiutswpoI"></a></p> -->
+            <img src="{% static 'login/img/animation.gif' %}" width="350" height="350">
             <p style="margin-top: -20px;">Click done once you've been contacted</p>
             <div class="container text-center">
               <form action="{% url 'home:delete_request' %}">
