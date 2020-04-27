@@ -11,8 +11,7 @@
           <div class="text-center">
             {% if user_profile.profile_pic.url %}
             <img class="profile-pic rounded-circle"
-                 src="{{ user_profile.profile_pic.url }}"
-                 onerror="this.onerror=null; this.src='defaults/default.jpg'"
+                 src="{{ user_profile.profile_pic.url }}" onerror="this.onerror=null; this.src='{% static 'login/img/default.jpg' %}'"
                  height="240" width="240">
             {% endif %}
             <h3>{{ this_user.first_name }} {{ this_user.last_name }}</h3>
