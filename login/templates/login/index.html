@@ -10,27 +10,28 @@
 
 
   <!-- Header -->
-  <header class="masthead">
-    <div class="container">
+  <header class="masthead wrap">
+      <div class="full-screen-video">
+            <video src="{% static '/login/img/questionconnectionvideo.mp4'%}" type="video/mp4" autoplay muted></video>
+      </div>
       <div class="intro-text">
         <div class="intro-lead-in">Need quick help on schoolwork?</div>
-        <div class="intro-heading text-uppercase">Sign Up to be a Tutor or Tutee</div>
+        <div class="intro-heading text-uppercase">Sign up to be a tutor or tutee</div>
             {% if user.is_authenticated %}
             <img class="mx-auto" src="{{ UserProfile.picture }}" alt="{{ UserProfile.email }}">
-            <p>Logged as {{ user.username }}</p>  
+            <p>Logged as {{ user.username }}</p>
               <a class="btn btn-primary btn-lg" href="{% url 'login:authflow' %}">Get Started!</a>
             <br>
             <div class="row mt-3"></div>
               {% else %}
                 <a class="btn btn-primary btn-lg" href="{% url "login:social:begin" "google-oauth2" %}">
-                  Login with your Virginia account!
+                  Get Started!
                 </a>
               {% endif %}
       </div>
-    </div>
   </header>
 
-  <!-- Services 
+  <!-- Services
   <section class="page-section" id="services">
     <div class="container">
       <div class="row">
@@ -80,7 +81,7 @@
       <div class="row">
         <div class="col">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/2.jpg' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/sakhi.jpg' %}" alt="">
             <h4>Sakhi Singh</h4>
             <p class="text-muted">Scrum Master</p>
           </div>
@@ -88,7 +89,7 @@
 
       <div class="col">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/IMG_8421.JPG' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/matt1.JPG' %}" alt="">
             <h4>Matt Burkher</h4>
             <p class="text-muted"> Testing Manager</p>
           </div>
@@ -97,7 +98,7 @@
 
         <div class="col">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/1.jpg' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/alex.jpg' %}" alt="">
             <h4>Alexandra Marquis</h4>
             <p class="text-muted">Requirements Manager</p>
           </div>
@@ -107,7 +108,7 @@
       <div class="row h-100">
       <div class="col">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/arvind.jpg' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/4.jpg' %}" alt="">
             <h4>Arvind Anand</h4>
             <p class="text-muted">Software Architect</p>
           </div>
@@ -115,7 +116,7 @@
 
       <div class="col">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/3.jpg' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{% static 'login/img/team/Sean.jpg' %}" alt="">
             <h4>Sean Davidson</h4>
             <p class="text-muted"> DevOps Manager </p>
           </div>
@@ -124,4 +125,3 @@
   </section>
 
 {% endblock %}
-

@@ -9,16 +9,13 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import dj_database_url
-import dotenv
+import psycopg2
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Dotenv SQL Lite Test
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
+DEBUG = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
@@ -28,7 +25,7 @@ STATICFILES_DIR = (
 )
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/images')
 MEDIA_URL = '/media/'
 
 #Used for Dotenv SQL Lite Test
@@ -48,8 +45,8 @@ LOGIN_REDIRECT_URL = '/login/authflow/'
 LOGOUT_REDIRECT_URL = '/login/logout/'
 
 # SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS = ['virginia.edu']
-#
 # SOCIAL_AUTH_LOGIN_ERROR_URL = '/login/authentication_error/'
+# SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 # SOCIAL_AUTH_BACKEND_ERROR_URL = '/login/authentication_error/'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'login:social'
@@ -57,6 +54,7 @@ SOCIAL_AUTH_URL_NAMESPACE = 'login:social'
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
     'social_core.pipeline.social_auth.social_uid',
+    # 'modular.pipeline.auth_allowed',
     'social_core.pipeline.social_auth.social_user',
     'social_core.pipeline.user.get_username',
     'social_core.pipeline.user.create_user',
@@ -67,10 +65,9 @@ SOCIAL_AUTH_PIPELINE = (
     'login.pipeline.save_profile'
 )
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['*']
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
@@ -81,6 +78,7 @@ AUTHENTICATION_BACKENDS = (
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap_modal_forms',
     'crispy_forms',
     'home.apps.HomeConfig', # ???
     'login.apps.LoginConfig',
@@ -102,6 +100,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'quicktutor.urls'
@@ -130,9 +129,7 @@ WSGI_APPLICATION = 'quicktutor.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-#Added Postgres Support
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+
 
 
 
@@ -173,10 +170,22 @@ USE_TZ = True
 try:
     import django_heroku
     django_heroku.settings(locals()) # test runner option to fix travis tests
-    # Forgets about the SSL
-    del DATABASES['default']['OPTIONS']['sslmode']
 except ImportError as exc:
     pass
+
+DATABASES = {}
+
+# Dotenv SQL Lite Test
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+else:
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 
 # Indicates that model UserProfile is the user profile

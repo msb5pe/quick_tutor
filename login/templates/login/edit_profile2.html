@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="page-section" id="edit_profile">
+  <div class="container">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-3">
+          <div class="text-center">
+            {% if user_profile.profile_pic.url %}
+            <img class="profile-pic rounded-circle"
+                 src="{{ user_profile.profile_pic.url }}" onerror="this.onerror=null; this.src='{% static 'login/img/default.jpg' %}'"
+                 height="240" width="240">
+            {% endif %}
+            <h3>{{ this_user.first_name }} {{ this_user.last_name }}</h3>
+            <h5>{{ this_user.email }}</h5>
+<!--            <h6>Upload a photo...</h6>-->
+
+<!--            <input type="file" class="form-control" name="picture">-->
+          </div>
+        </div>
+
+        <!-- edit form column -->
+        <div class="col-md-9 personal-info">
+          <h3>Personal info</h3>
+          <div class="alert alert-info alert-dismissable">
+            <a class="panel-close close" data-dismiss="alert">×</a>
+            <i class="fa fa-coffee"></i>
+            Fill in some details before moving on!
+          </div>
+          <form action="{% url 'login:edit_redirect' %}" method="POST" class="form-horizontal" role="form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+              <label class="col-lg-3 control-label">First name:</label>
+              <div class="col-lg-8">
+                <input class="form-control" type="text" value="{{ this_user.first_name }}" name="first_name" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-3 control-label">Last name:</label>
+              <div class="col-lg-8">
+                <input class="form-control" type="text" value="{{ this_user.last_name }}" name="last_name" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-3 control-label">Email:</label>
+              <div class="col-lg-8">
+                <input class="form-control" type="email" value="{{ this_user.email }}" name="email" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label">Username:</label>
+              <div class="col-md-8">
+                <input class="form-control" type="text" value="{{ this_user.username }}" name="username">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label">Phone Number:</label>
+              <div class="col-md-8">
+                <input class="form-control" type="text" value="{{ user_profile.phone }}" name="phone"
+                   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                   required>
+                <small>Format: 123-456-7890</small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label">Upload Profile Picture:</label>
+              <div class="col-md-8">
+                <input type="file" class="form-control" name="profile_pic">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label"></label>
+              <div class="col-md-8">
+                <input type="submit" class="btn btn-primary" value="Save Changes">
+                <span></span>
+                <input type="reset" class="btn btn-default" value="Reset" href="{% url 'login:edit_profile' %}">
+              </div>
+            </div>
+          </form>
+        </div>
+    </div>
+  </div>
+  <hr>
+</div>
+
+{% endblock %}

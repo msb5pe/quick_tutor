@@ -1,32 +1,37 @@
 {% extends 'base.html' %}
-
 {% load static %}
-
 
 {% block body %}
 <br>
-<div class="page-section">
+<div class="page-section" id="intro-form-heading">
       <div class="container">
         <div class="row">
 
-          <div class="col-lg-6 text-center">
-            <br><br><br>
+          <div class="col-lg-8 text-center">
             <h1 class="section-heading text">Waiting for tutor...</h1>
+            <p>A tutor will contact you via your phone number to set up a tutoring session.</p>
             <!-- <iframe src="https://giphy.com/embed/hr1YxQKno3Di0" width="480" height=“288” frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/web-design-hr1YxQKno3Di0">via GIPHY</a></p>-->
-            <iframe src="https://giphy.com/embed/hr1YxQKno3Di0" width="500" height=“300” frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/web-design-hr1YxQKno3Di0">via GIPHY</a></p>
-            <!--<img class="img-fluid" width="500" height="300" src="{% static 'home/img/loading.jpg' %}" alt="www.webfirm.com" > -->
+<!--            <iframe src="https://giphy.com/embed/XcShQfTsYfiutswpoI" width="300" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/XcShQfTsYfiutswpoI"></a></p> -->
+            <img src="{% static 'login/img/animation.gif' %}" width="350" height="350">
+            <p style="margin-top: -20px;">Click done once you've been contacted</p>
+            <div class="container text-center">
+              <form action="{% url 'home:delete_request' %}">
+                <button type="submit" class="btn btn-primary" name="username_button">Done</button>
+              </form>
+            </div>
           </div>
+
 
 
           <!-- Start Profile Card -->
           <div class="col-lg-4 right-align">
             <div class="card">
-              <div class="card-body">
+              <div class="card-body" id="profile-card">
                 <h4 class="card-title">Profile</h4>
                 <!-- Insert user's profile info here -->
                 <p class="card-text"><b>Name: </b>{{userprofile.user.first_name}} {{userprofile.user.last_name}}</p>
                 <p class="card-text"><b>Phone Number: </b>{{userprofile.phone}}</p>
-                <p class="card-text"><b>Classes: </b>
+                <p class="card-text"><b>Needs help in: </b>
                   {% for class in classes %}
                   <span class="badge badge-primary badge-pill">{{class}}</span>
                   {% endfor %}
@@ -38,13 +43,10 @@
           </div>
           <!-- End of Profile Card -->
 
-
       </div> <!-- End row div -->
     </div> <!-- End row container -->
+
 </div> <!-- End page section div -->
-
-
-
 
 
 {% endblock %}

@@ -4,6 +4,57 @@
 
 {% block head %}
 <title>Question Connection</title>
+<script>
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+      $('.selectpicker').selectpicker('mobile');
+   }
+   class Stack{
+      constructor() {
+        this.stack = [];
+      }
+      push(val){
+         if(!this.stack.includes(val)){
+            this.stack.push(val);
+         }
+      }
+      pop(){
+         if(this.stack.length == 0){
+            return "Underflow";
+         }
+         return this.stack.pop();
+      }
+      length(){
+         return this.stack.length;
+      }
+   }
+
+  var s = new Stack();
+  var count = 0;
+  function addMore(){
+    count++;
+    var div = document.getElementById("add");
+    var search_element = document.createElement("input")
+    search_element.type = "text";
+    search_element.id = count;
+    search_element.className = "form-control";
+    search_element.placeholder = "ex:CS,APMA,COMM,etc..";
+    search_element.pattern = "([A-Z]|[a-z])*";
+    search_element.name = "dept"
+    div.appendChild(search_element);
+    var br = document.createElement("br")
+    br.id = count+"br";
+    div.appendChild(br);
+    s.push(count);
+  }
+
+  function remove(){
+    var val = s.pop();
+    if(val){
+      document.getElementById(val).remove();
+      document.getElementById(val+"br").remove();
+    }
+  }
+</script>
 {% endblock %}
 
 
@@ -19,33 +70,38 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <br>
-      <div class="page-section" id="intro-form-heading">
+      <div class="page-section" id="dept-container">
           <div class="container">
-            {% if is_tutor %}
-            <h2>Select a department<span class="badge badge-secondary">Tutor</span></h2>
-            {% else %}
-            <h2>Select a department<span class="badge badge-secondary">Student</span></h2>
-            {% endif %}
-          <div class="row">
-            <div class="col-lg-12 text-center">
+            <div class="col">
+              {% if is_tutor %}
+              <h2>What department do you want to tutor in?  <span class="badge badge-secondary">Tutor</span></h2>
+              {% else %}
+              <h2>What department do you need tutoring in?  <span class="badge badge-secondary">Student</span></h2>
+              {% endif %}
+          <div class="row" id="dept-content">
+            <div class="col-lg-6 text-center">
             <form action="{% url 'login:selector' %}" method="post"> {% csrf_token %}
-                  <div class="form-row align-items-center">
-                  <select class="selectpicker" multiple data-live-search="true" name="departments" data-width="auto">
-                        <option value="APMA">APMA</option>
-                        <option value="CS">CS</option>
-                        <option value="BME">BME</option>
-                        <option value="ECE">ECE</option>
-                        <option value="CE">CE</option>
-                        <option value="PHYS">PHYS</option>
-                        <option value="CHEM">CHEM</option>
-                  </select>
+                  <div class="form-row" id="search-btn">
+                    <div class="form-group py-2" id="add">
+                      <input type="text" class="form-control" placeholder="ex: CS,APMA,COMM,etc.." pattern="([A-Z]|[a-z])*" name="dept">
+                      <br>
+                    </div>
                   </div>
-                </div>
-                  <div class="col-auto my-1">
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <div class="py-2 text-left" id="add-remove-btns">
+                        {% if is_tutor %}
+                        <button value="input "type="button" class="btn btn-dark"  onclick="addMore()">Add More</button>
+                        <button value="input" type="button" class="btn btn-light" onclick="remove()">Remove Last</button>
+                        {% endif %}
+                    </div>
+                  <div class="form-group py-2 text-left" >
+                    <button type="submit" class="btn btn-primary" id="search-button">Search</button>
                   </div>
               </form>
             </div>
+              <div class="col-lg-6" id="dept_img">
+                  <img src="{% static 'login/img/dept_select_guy.jpg'%}" class="img-fluid card-img-overlay" alt="Responsive image">
+              </div>
+          </div>
           </div>
           </div>
       </div>
@@ -53,4 +109,3 @@
 
 
 {% endblock %}
-
