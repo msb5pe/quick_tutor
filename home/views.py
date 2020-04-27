@@ -90,7 +90,10 @@ def get_requests(classes):
     return students
     
 def intersection(l1, l2):
-    res = list(filter(lambda x: x in l1, l2))
+    res = []
+    for l in l1:
+        if(l in l2):
+            res.append(l)
     return res
 
 # Delete request object
