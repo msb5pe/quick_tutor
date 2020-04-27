@@ -83,20 +83,33 @@ def get_requests(classes):
     students = []
     tutor_requests = TutorRequest.objects.all()
     for profile in tutor_requests:
-        student_classes = profile.classes.split(',')
-        class_ls = classes.split(',')
+        student_classes = parse_classes(profile.classes)
+        class_ls = parse_classes(classes)
         if intersection(class_ls, student_classes):
             students.append(profile)
     return students
     
 def intersection(l1, l2):
-    res = list(filter(lambda x: x in l1, l2))
+    res = []
+    for l in l1:
+        if(l in l2):
+            res.append(l)
     return res
 
 # Delete request object
 def delete_request(request):
     TutorRequest.objects.filter(user=request.user).delete()
     return redirect('login:authflow')
+
+
+def parse_classes(l):
+    ret_ls = []
+    c = l.split(',')
+    for s in c:
+        tmp = s.split(":")
+        ret_ls.append(tmp[0])
+    return ret_ls
+
 
 
 # onlineProfiles = get_current_profiles(request.user)
