@@ -75,6 +75,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
+∂
 # Application definition
 
 INSTALLED_APPS = [
