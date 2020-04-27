@@ -150,7 +150,7 @@ class userprofile_test(TestCase):
         self.profile1 = self.user1.userprofile
         self.profile1.helped = False
         self.assertEqual(False,self.profile1.helped)
-        self.profil1.helped = True
+        self.profile1.helped = True
         self.assertEqual(True, self.profile1.helped)
 
     def firsttimeuser_test(self):
